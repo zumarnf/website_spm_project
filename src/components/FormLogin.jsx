@@ -5,27 +5,30 @@ const FormLogin = () => {
   return (
     <>
       <div>
-        <label className="input flex items-center gap-2 mb-7 border border-black bg-whtprmy">
+        <div>
+          <h1 className="text-3xl font-extrabold mb-7 text-blckprmy">Login</h1>
+        </div>
+        <label className="input flex items-center gap-2 mb-7 border border-blckprmy bg-whtprmy">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
             fill="currentColor"
-            className="h-4 w-4 text-black"
+            className="h-4 w-4 text-blckprmy"
           >
             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
           </svg>
           <input
             type="text"
-            className="grow text-black placeholder-gray-400 focus:outline-none"
+            className="grow text-blckprmy placeholder-gray-400 focus:outline-none"
             placeholder="Username"
           />
         </label>
-        <label className="input flex items-center gap-2 mb-7 border border-black bg-whtprmy">
+        <label className="input flex items-center gap-2 mb-7 border border-blckprmy bg-whtprmy">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
             fill="currentColor"
-            className="h-4 w-4 text-black"
+            className="h-4 w-4 text-blckprmy"
           >
             <path
               fillRule="evenodd"
@@ -35,7 +38,7 @@ const FormLogin = () => {
           </svg>
           <input
             type="password"
-            className="grow text-black placeholder-gray-400 focus:outline-none"
+            className="grow text-blckprmy placeholder-gray-400 focus:outline-none"
             placeholder="Password"
           />
         </label>

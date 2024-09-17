@@ -1,5 +1,4 @@
 import React from "react";
-import BtnLogin from "../components/BtnLogin";
 import FormLogin from "../components/FormLogin";
 
 const LoginPage = () => {
