@@ -1,4 +1,3 @@
-import React from "react";
 import BtnLogin from "./BtnLogin";
 
 const FormLogin = () => {
@@ -19,7 +18,7 @@ const FormLogin = () => {
           </svg>
           <input
             type="text"
-            className="grow text-blckprmy placeholder-gray-400 focus:outline-none"
+            className="grow text-blckprmy placeholder-gray-400 focus:outline-none focus:ring-0 border-none"
             placeholder="Username"
           />
         </label>
@@ -38,7 +37,7 @@ const FormLogin = () => {
           </svg>
           <input
             type="password"
-            className="grow text-blckprmy placeholder-gray-400 focus:outline-none"
+            className="grow text-blckprmy placeholder-gray-400 focus:outline-none focus:ring-0 border-none"
             placeholder="Password"
           />
         </label>

@@ -1,4 +1,3 @@
-import React from "react";
 import logo from "../assets/shield-database.svg"; // Arahkan ke lokasi file SVG
 
 const LogoLogin = () => {

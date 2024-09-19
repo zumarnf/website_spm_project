@@ -1,6 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+const flowbite = require("flowbite-react/tailwind");
+
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    flowbite.content(), // Tambahkan path untuk Flowbite React
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -13,5 +19,8 @@ export default {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    flowbite.plugin(), // Tambahkan plugin untuk Flowbite React
+  ],
 };
