@@ -1,7 +1,12 @@
+import ContainerProfile from "./ContainerProfile";
+
 const Dasboard = () => {
   return (
     <>
-      <div className="h-screen py-10"></div>
+      <div className="h-full flex flex-col">
+        <ContainerProfile />
+        <div className="h-full w-full border border-blckprmy rounded-xl"></div>
+      </div>
     </>
   );
 };

@@ -11,36 +11,35 @@ import shieldDatabase from "../assets/shield-database.svg"; // Pastikan path ini
 
 const SidebarMen = () => {
   return (
-    <div className="px-10 py-10 bg-whtprmy">
+    <div className="pl-8 py-5 bg-whtprmy h-full">
+      {" "}
+      {/* Tambahkan h-full */}
       <Sidebar>
         <Sidebar.Logo
           href="#"
           img={shieldDatabase}
           imgAlt="Flowbite logo"
-          className="mb-10"
+          className="pb-9"
         >
-          <div className="text-blckprmy text-3xl">Flowbite</div>
+          <div className="text-blckprmy text-2xl">Flowbite</div>
         </Sidebar.Logo>
         <Sidebar.Items>
           <Sidebar.ItemGroup>
-            {/* Dashboard Item */}
             <Sidebar.Item
               href="#"
               className="hover:bg-rdprmy hover:text-whtprmy group"
             >
               <div className="flex flex-row">
-                <HiChartPie className="h-6 w-6 text-blckprmy mr-2 group-hover:text-whtprmy" />
-                <span>Dashboard</span>
+                <HiChartPie className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <span className="text-sm">Dashboard</span>
               </div>
             </Sidebar.Item>
-
-            {/* E-commerce Collapse */}
             <Sidebar.Collapse
               className="hover:bg-rdprmy hover:text-whtprmy group"
               label={
                 <div className="flex items-center">
-                  <HiShoppingBag className="h-6 w-6 text-blckprmy mr-2 group-hover:text-whtprmy" />
-                  <span>E-commerce</span>
+                  <HiShoppingBag className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                  <span className="text-sm">E-commerce</span>
                 </div>
               }
               renderChevronIcon={(theme, open) => {
@@ -48,7 +47,7 @@ const SidebarMen = () => {
                 return (
                   <IconComponent
                     aria-hidden
-                    className={`h-6 w-6 text-blckprmy ${
+                    className={`h-5 w-5 text-blckprmy ${
                       theme.label.icon.open[open ? "on" : "off"]
                     }`}
                   />
@@ -60,8 +59,8 @@ const SidebarMen = () => {
                 className="hover:bg-rdprmy hover:text-whtprmy group"
               >
                 <div className="flex flex-row">
-                  <HiShoppingBag className="h-6 w-6 text-blckprmy mr-2 group-hover:text-whtprmy" />
-                  <span>Products</span>
+                  <HiShoppingBag className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                  <span className="text-sm">Products</span>
                 </div>
               </Sidebar.Item>
               <Sidebar.Item
@@ -69,43 +68,39 @@ const SidebarMen = () => {
                 className="hover:bg-rdprmy hover:text-whtprmy group"
               >
                 <div className="flex flex-row">
-                  <HiShoppingBag className="h-6 w-6 text-blckprmy mr-2 group-hover:text-whtprmy" />
-                  <span>Sales</span>
+                  <HiShoppingBag className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                  <span className="text-sm">Sales</span>
                 </div>
               </Sidebar.Item>
             </Sidebar.Collapse>
 
-            {/* Inbox Item */}
-
             <Sidebar.Item
               href="#"
               className="hover:bg-rdprmy hover:text-whtprmy group"
             >
               <div className="flex flex-row">
-                <HiInbox className="h-6 w-6 text-blckprmy mr-2 group-hover:text-whtprmy" />
-                <span>Inbox</span>
+                <HiInbox className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <span className="text-sm">Inbox</span>
               </div>
             </Sidebar.Item>
 
-            {/* Users Item */}
             <Sidebar.Item
               href="#"
               className="hover:bg-rdprmy hover:text-whtprmy group"
             >
               <div className="flex flex-row">
-                <HiUser className="h-6 w-6 text-blckprmy mr-2 group-hover:text-whtprmy" />
-                <span>Users</span>
+                <HiUser className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <span className="text-sm">Users</span>
               </div>
             </Sidebar.Item>
 
-            {/* Products Item */}
             <Sidebar.Item
               href="#"
               className="hover:bg-rdprmy hover:text-whtprmy group"
             >
               <div className="flex flex-row">
-                <HiShoppingBag className="h-6 w-6 text-blckprmy mr-2 group-hover:text-whtprmy" />
-                <span>Products</span>
+                <HiShoppingBag className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <span className="text-sm">Products</span>
               </div>
             </Sidebar.Item>
           </Sidebar.ItemGroup>
