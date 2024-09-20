@@ -1,4 +1,4 @@
-import BtnLogin from "./BtnLogin";
+import BtnLogin from "./button/BtnLogin";
 
 const FormLogin = () => {
   return (
