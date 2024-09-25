@@ -1,15 +1,22 @@
-import { HiArrowRight } from "react-icons/hi"; // Menggunakan react-icons untuk panah
-import { FaBook, FaUser, FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Import Link untuk navigasi
+import { HiArrowRight } from "react-icons/hi";
+import {
+  HiStar,
+  HiAcademicCap,
+  HiUser,
+  HiHand,
+  HiDocument,
+} from "react-icons/hi";
+import { Link } from "react-router-dom";
 import ContainerProfile from "./ContainerProfile";
+import MenuModal from "./modal/MenuModal";
 
-const CardItem = ({ title, number, Icon, link }) => (
-  <div className="flex justify-between items-center w-72 h-36 border rounded-lg p-7 shadow-md">
+const CardItem = ({ title, number, Icon, link, iconColor }) => (
+  <div className="flex justify-between items-center w-64 h-36 border rounded-2xl p-7 shadow-md">
     <div>
-      <h2 className="text-lg font-semibold mb-2 pb-5">{title}</h2>
+      <h2 className="text-xl font-semibold pb-7 text-blckprmy">{title}</h2>
       <div className="flex items-center">
-        <Icon className="text-4xl mr-3" />{" "}
-        <span className="text-3xl font-bold">{number}</span>
+        <Icon className={`text-3xl mr-6 ${iconColor}`} />{" "}
+        <span className="text-3xl font-bold text-blckprmy">{number}</span>
       </div>
     </div>
     <div className="text-rdprmy">
@@ -22,32 +29,49 @@ const CardItem = ({ title, number, Icon, link }) => (
 
 const Dashboard = () => {
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col pr-5 pb-5">
       <ContainerProfile />
+      <MenuModal />
       <div className="h-full w-full border border-blckprmy rounded-xl p-4">
         <div className="px-7 py-4">
-          <h1 className="text-3xl font-extrabold mb-7 text-blckprmy">
-            Dashboard
-          </h1>
+          <h1 className="text-2xl font-bold pb-7 text-blckprmy">Dashboard</h1>
         </div>
-        <div className="flex justify-between px-7">
+        {/* Menggunakan grid untuk tata letak kartu */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-7">
           <CardItem
             title="Penelitian"
             number={190}
-            Icon={FaBook}
+            Icon={HiDocument}
             link="/penelitian"
+            iconColor="text-blckprmy"
           />
           <CardItem
-            title="Pengguna"
+            title="Dosen"
             number={150}
-            Icon={FaUser}
+            Icon={HiUser}
             link="/pengguna"
+            iconColor="text-blckprmy"
           />
           <CardItem
-            title="Penjualan"
+            title="Mahasiswa"
             number={200}
-            Icon={FaShoppingCart}
+            Icon={HiAcademicCap}
             link="/penjualan"
+            iconColor="text-blckprmy"
+          />
+          <CardItem
+            title="Pengabdian"
+            number={200}
+            Icon={HiHand}
+            link="/penjualan"
+            iconColor="text-blckprmy"
+          />
+          <CardItem
+            title="Prestasi"
+            number={200}
+            Icon={HiStar}
+            link="/penjualan"
+            iconColor="text-blckprmy"
           />
         </div>
       </div>

@@ -1,17 +1,20 @@
 import { Sidebar } from "flowbite-react";
 import {
   HiChartPie,
-  HiInbox,
-  HiShoppingBag,
+  HiAcademicCap,
+  HiCollection,
   HiUser,
+  HiHand,
+  HiDocument,
   HiOutlineMinusSm,
   HiOutlinePlusSm,
+  HiStar,
 } from "react-icons/hi";
-import shieldDatabase from "../assets/shield-database.svg"; // Pastikan path ini benar
+import shieldDatabase from "../assets/shield-database.svg";
 
 const SidebarMen = () => {
   return (
-    <div className="pl-8 py-5 bg-whtprmy h-full">
+    <div className="pl-6 py-5 bg-whtprmy h-full">
       {" "}
       {/* Tambahkan h-full */}
       <Sidebar>
@@ -21,7 +24,7 @@ const SidebarMen = () => {
           imgAlt="Flowbite logo"
           className="pb-9"
         >
-          <div className="text-blckprmy text-2xl">Flowbite</div>
+          <div className="text-blckprmy text-3xl">Flowbite</div>
         </Sidebar.Logo>
         <Sidebar.Items>
           <Sidebar.ItemGroup>
@@ -30,16 +33,16 @@ const SidebarMen = () => {
               className="hover:bg-rdprmy hover:text-whtprmy group"
             >
               <div className="flex flex-row">
-                <HiChartPie className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
-                <span className="text-sm">Dashboard</span>
+                <HiChartPie className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <span className="text-base">Dashboard</span>
               </div>
             </Sidebar.Item>
             <Sidebar.Collapse
               className="hover:bg-rdprmy hover:text-whtprmy group"
               label={
                 <div className="flex items-center">
-                  <HiShoppingBag className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
-                  <span className="text-sm">E-commerce</span>
+                  <HiCollection className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                  <span className="text-base">Riset</span>
                 </div>
               }
               renderChevronIcon={(theme, open) => {
@@ -47,7 +50,7 @@ const SidebarMen = () => {
                 return (
                   <IconComponent
                     aria-hidden
-                    className={`h-5 w-5 text-blckprmy ${
+                    className={`h-6 w-6 text-blckprmy hover:text-whtprmy ${
                       theme.label.icon.open[open ? "on" : "off"]
                     }`}
                   />
@@ -59,8 +62,8 @@ const SidebarMen = () => {
                 className="hover:bg-rdprmy hover:text-whtprmy group"
               >
                 <div className="flex flex-row">
-                  <HiShoppingBag className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
-                  <span className="text-sm">Products</span>
+                  <HiDocument className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                  <span className="text-base">Penelitian</span>
                 </div>
               </Sidebar.Item>
               <Sidebar.Item
@@ -68,8 +71,8 @@ const SidebarMen = () => {
                 className="hover:bg-rdprmy hover:text-whtprmy group"
               >
                 <div className="flex flex-row">
-                  <HiShoppingBag className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
-                  <span className="text-sm">Sales</span>
+                  <HiHand className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                  <span className="text-base">Pengabdian</span>
                 </div>
               </Sidebar.Item>
             </Sidebar.Collapse>
@@ -79,8 +82,8 @@ const SidebarMen = () => {
               className="hover:bg-rdprmy hover:text-whtprmy group"
             >
               <div className="flex flex-row">
-                <HiInbox className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
-                <span className="text-sm">Inbox</span>
+                <HiAcademicCap className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <span className="text-base">Mahasiswa</span>
               </div>
             </Sidebar.Item>
 
@@ -89,8 +92,8 @@ const SidebarMen = () => {
               className="hover:bg-rdprmy hover:text-whtprmy group"
             >
               <div className="flex flex-row">
-                <HiUser className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
-                <span className="text-sm">Users</span>
+                <HiUser className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <span className="text-base">Dosen</span>
               </div>
             </Sidebar.Item>
 
@@ -99,8 +102,8 @@ const SidebarMen = () => {
               className="hover:bg-rdprmy hover:text-whtprmy group"
             >
               <div className="flex flex-row">
-                <HiShoppingBag className="h-5 w-5 text-blckprmy pr-2 group-hover:text-whtprmy" />
-                <span className="text-sm">Products</span>
+                <HiStar className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <span className="text-base">Prestasi</span>
               </div>
             </Sidebar.Item>
           </Sidebar.ItemGroup>
