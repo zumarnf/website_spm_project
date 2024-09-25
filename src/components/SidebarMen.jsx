@@ -29,7 +29,7 @@ const SidebarMen = () => {
         <Sidebar.Items>
           <Sidebar.ItemGroup>
             <Sidebar.Item
-              href="#"
+              href="/home"
               className="hover:bg-rdprmy hover:text-whtprmy group"
             >
               <div className="flex flex-row">
@@ -58,7 +58,7 @@ const SidebarMen = () => {
               }}
             >
               <Sidebar.Item
-                href="#"
+                href="/penelitian"
                 className="hover:bg-rdprmy hover:text-whtprmy group"
               >
                 <div className="flex flex-row">

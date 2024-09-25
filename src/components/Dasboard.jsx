@@ -29,7 +29,7 @@ const CardItem = ({ title, number, Icon, link, iconColor }) => (
 
 const Dashboard = () => {
   return (
-    <div className="h-full flex flex-col pr-5 pb-5">
+    <div className="h-full flex flex-col pr-5 pb-5 overflow-auto">
       <ContainerProfile />
       <MenuModal />
       <div className="h-full w-full border border-blckprmy rounded-xl p-4">
@@ -37,7 +37,7 @@ const Dashboard = () => {
           <h1 className="text-2xl font-bold pb-7 text-blckprmy">Dashboard</h1>
         </div>
         {/* Menggunakan grid untuk tata letak kartu */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-6">
           <CardItem
             title="Penelitian"
             number={190}
