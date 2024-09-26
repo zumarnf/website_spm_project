@@ -1,5 +1,5 @@
 import React from "react";
-import SidebarMen from "../components/SidebarMen";
+import SidebarMen from "../components/layout/SidebarMen";
 import TablePen from "../components/TablePen";
 
 const Penelitian = () => {
