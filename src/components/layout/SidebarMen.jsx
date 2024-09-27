@@ -10,7 +10,7 @@ import {
   HiOutlinePlusSm,
   HiStar,
 } from "react-icons/hi";
-import shieldDatabase from "../assets/shield-database.svg";
+import shieldDatabase from "/src/assets/shield-database.svg";
 
 const SidebarMen = () => {
   return (
@@ -24,7 +24,7 @@ const SidebarMen = () => {
           imgAlt="Flowbite logo"
           className="pb-9"
         >
-          <div className="text-blckprmy text-3xl">Flowbite</div>
+          <div className="text-blckprmy text-3xl">SiPeM</div>
         </Sidebar.Logo>
         <Sidebar.Items>
           <Sidebar.ItemGroup>

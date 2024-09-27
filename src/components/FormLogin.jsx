@@ -5,7 +5,9 @@ const FormLogin = () => {
     <>
       <div>
         <div>
-          <h1 className="text-3xl font-extrabold mb-7 text-blckprmy">Login</h1>
+          <h1 className="text-3xl font-extrabold mb-7 text-blckprmy">
+            Login SiPeM
+          </h1>
         </div>
         <label className="input flex items-center gap-2 mb-7 border border-blckprmy bg-whtprmy">
           <svg

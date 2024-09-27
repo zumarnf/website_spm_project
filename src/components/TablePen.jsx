@@ -1,6 +1,8 @@
 import React from "react";
 import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
+import BtnSearchPen from "./button/BtnSearchPen";
+import SelectPen from "./button/SelectPen";
 
 const TablePen = () => {
   return (
@@ -9,16 +11,27 @@ const TablePen = () => {
         <ContainerProfile />
         <MenuModal />
         <div className="h-full w-full border border-blckprmy rounded-xl p-4">
-          <div className="px-7 py-4">
-            <h1 className="text-2xl font-bold text-blckprmy">
-              Data Penelitian
-            </h1>
+          <div className="flex justify-between">
+            <div className="px-7 py-4">
+              <h1 className="text-2xl font-bold text-blckprmy">
+                Data Penelitian
+              </h1>
+            </div>
+            <div className="flex flex-row gap-3 pr-3">
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered border-blckprmy bg-whtprmy w-full max-w-xs"
+              />
+              <SelectPen />
+              <BtnSearchPen />
+            </div>
           </div>
-          <div>
-            <div className="overflow-x-auto text-blckprmy">
-              <table className="table">
+          <div className="bg-whtprmy px-6">
+            <div className="overflow-x-auto text-blckprmy bg-whtprmy">
+              <table className="table table-pin-rows-whtprmy ">
                 {/* head */}
-                <thead>
+                <thead className="bg-whtprmy text-blckprmy">
                   <tr>
                     <th></th>
                     <th>Name</th>

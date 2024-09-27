@@ -1,5 +1,5 @@
 import Dasboard from "../components/Dasboard";
-import SidebarMen from "../components/SidebarMen";
+import SidebarMen from "../components/layout/SidebarMen";
 
 const HomeMenu = () => {
   return (
