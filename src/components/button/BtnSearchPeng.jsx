@@ -1,6 +1,6 @@
 import React from "react";
 
-const BtnSearchPen = () => {
+const BtnSearchPeng = () => {
   return (
     <>
       <button className="btn btn-sm bg-rdprmy text-whtprmy border-none w-16 text-sm">
@@ -10,4 +10,4 @@ const BtnSearchPen = () => {
   );
 };
 
-export default BtnSearchPen;
+export default BtnSearchPeng;

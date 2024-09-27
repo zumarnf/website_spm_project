@@ -15,7 +15,6 @@ import shieldDatabase from "/src/assets/shield-database.svg";
 const SidebarMen = () => {
   return (
     <div className="pl-6 py-5 bg-whtprmy h-full">
-      {" "}
       {/* Tambahkan h-full */}
       <Sidebar>
         <Sidebar.Logo
@@ -67,7 +66,7 @@ const SidebarMen = () => {
                 </div>
               </Sidebar.Item>
               <Sidebar.Item
-                href="#"
+                href="/pengabdian"
                 className="hover:bg-rdprmy hover:text-whtprmy group"
               >
                 <div className="flex flex-row">

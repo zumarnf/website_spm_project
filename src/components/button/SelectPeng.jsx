@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectPen = () => {
+const SelectPeng = () => {
   return (
     <>
       <select className="select select-bordered w-36 max-w-xs bg-whtprmy text-blckprmy select-sm text-sm">
@@ -14,4 +14,4 @@ const SelectPen = () => {
   );
 };
 
-export default SelectPen;
+export default SelectPeng;

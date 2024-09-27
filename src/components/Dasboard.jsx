@@ -63,7 +63,7 @@ const Dashboard = () => {
             title="Pengabdian"
             number={200}
             Icon={HiHand}
-            link="/penjualan"
+            link="/pengabdian"
             iconColor="text-blckprmy"
           />
           <CardItem
