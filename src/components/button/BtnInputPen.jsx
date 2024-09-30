@@ -1,12 +1,13 @@
 import React from "react";
 
-const BtnInputPen = () => {
+const BtnInputPen = ({ onClick }) => {
   return (
-    <>
-      <button className="btn btn-sm bg-rdprmy text-whtprmy border-none w-20">
-        Input
-      </button>
-    </>
+    <button
+      className="btn btn-sm bg-rdprmy text-whtprmy border-none w-20"
+      onClick={onClick}
+    >
+      Input
+    </button>
   );
 };
 
