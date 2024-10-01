@@ -2,6 +2,9 @@
 const flowbite = require("flowbite-react/tailwind");
 
 export default {
+  daisyui: {
+    themes: ["light"],
+  },
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",

@@ -9,16 +9,40 @@ const InputPenMaha = ({ onClose }) => {
         open
       >
         <div className="modal-box bg-whtprmy text-blckprmy">
-          <h3 className="font-bold text-lg">Konfirmasi Data Penelitian</h3>
-          <p className="py-4">
-            Data penelitian berhasil diinput. Lanjutkan dengan menyimpan atau
-            batalkan jika ada perubahan.
-          </p>
-          <div className="modal-action">
-            <button className="btn btn-sm bg-grnprmy text-whtprmy border-none">
+          <h3 className="font-bold text-lg pb-7">Input Partisipasi</h3>
+          <div>Ketua</div>
+          <form className="grid grid-cols-3 gap-y-4 gap-x-3 text-sm">
+            <select className="select select-bordered w-36 max-w-xs bg-whtprmy text-blckprmy select-sm text-sm">
+              <option disabled selected>
+                Jenis
+              </option>
+              <option>Dosen</option>
+              <option>Mahasiswa</option>
+            </select>
+            <input
+              type="text"
+              placeholder="Nama"
+              className="input input-bordered w-full bg-whtprmy input-sm"
+            />
+            <div className="flex flex-row gap-2 justify-center items-center">
+              <input
+                type="text"
+                placeholder="NIM/NIP"
+                className="input input-bordered w-full bg-whtprmy input-sm"
+              />
+              <button className="btn btn-xs font-extrabold text-base rounded-full text-whtprmy bg-rdprmy flex border-none text-center">
+                +
+              </button>
+            </div>
+          </form>
+          <div className="modal-action pt-7">
+            <button className="btn btn-sm text-whtprmy bg-rdprmy border-none">
               Simpan Permanen
             </button>
-            <button className="btn btn-sm" onClick={onClose}>
+            <button
+              className="btn btn-sm text-whtprmy bg-rdprmy border-none"
+              onClick={onClose}
+            >
               Back
             </button>
           </div>

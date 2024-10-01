@@ -25,11 +25,10 @@ const InputPenModal = ({ onClose }) => {
 
   return (
     <>
-      {/* Modal InputPenModal */}
       {isModalPenVisible && (
         <dialog
           id="my_modal_5"
-          className="modal modal-bottom sm:modal-middle"
+          className="modal modal-bottom sm:modal-middle w-full overflow-hidden"
           open
         >
           <div className="modal-box bg-whtprmy text-blckprmy">

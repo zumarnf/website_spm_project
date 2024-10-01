@@ -7,8 +7,9 @@ const SelectPen = () => {
         <option disabled selected>
           Cari
         </option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
+        <option>NIM</option>
+        <option>Nama</option>
+        <option>Judul</option>
       </select>
     </>
   );
