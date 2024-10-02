@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
 const InputPenMaha = ({ onClose }) => {
+  const [participants, setParticipants] = useState([{ name: "", id: "" }]);
+
+  const handleAddParticipant = () => {
+    if (participants.length < 5) {
+      setParticipants([...participants, { name: "", id: "" }]);
+    }
+  };
+
+  const handleChange = (index, field, value) => {
+    const updatedParticipants = [...participants];
+    updatedParticipants[index][field] = value;
+    setParticipants(updatedParticipants);
+  };
+
+  const handleDeleteParticipant = (index) => {
+    const updatedParticipants = participants.filter((_, i) => i !== index);
+    setParticipants(updatedParticipants);
+  };
+
   return (
     <>
       <dialog
@@ -10,30 +29,50 @@ const InputPenMaha = ({ onClose }) => {
       >
         <div className="modal-box bg-whtprmy text-blckprmy">
           <h3 className="font-bold text-lg pb-7">Input Partisipasi</h3>
-          <div>Ketua</div>
           <form className="grid grid-cols-3 gap-y-4 gap-x-3 text-sm">
-            <select className="select select-bordered w-36 max-w-xs bg-whtprmy text-blckprmy select-sm text-sm">
-              <option disabled selected>
-                Jenis
-              </option>
-              <option>Dosen</option>
-              <option>Mahasiswa</option>
-            </select>
-            <input
-              type="text"
-              placeholder="Nama"
-              className="input input-bordered w-full bg-whtprmy input-sm"
-            />
-            <div className="flex flex-row gap-2 justify-center items-center">
-              <input
-                type="text"
-                placeholder="NIM/NIP"
-                className="input input-bordered w-full bg-whtprmy input-sm"
-              />
-              <button className="btn btn-xs font-extrabold text-base rounded-full text-whtprmy bg-rdprmy flex border-none text-center">
-                +
-              </button>
-            </div>
+            {participants.map((participant, index) => (
+              <React.Fragment key={index}>
+                {/* Label sesuai urutan input */}
+                <label className="font-bold">
+                  {index === 0 ? "Ketua" : "Anggota"}
+                </label>
+                <input
+                  type="text"
+                  placeholder="Nama"
+                  className="input input-bordered w-full bg-whtprmy input-sm"
+                  value={participant.name}
+                  onChange={(e) => handleChange(index, "name", e.target.value)}
+                />
+                <div className="flex flex-row gap-2 justify-center items-center">
+                  <input
+                    type="text"
+                    placeholder="NIM/NIP"
+                    className="input input-bordered w-full bg-whtprmy input-sm"
+                    value={participant.id}
+                    onChange={(e) => handleChange(index, "id", e.target.value)}
+                  />
+                  {index === participants.length - 1 &&
+                    participants.length < 5 && (
+                      <button
+                        type="button"
+                        className="btn btn-xs font-extrabold text-base rounded-full text-whtprmy bg-rdprmy flex border-none text-center"
+                        onClick={handleAddParticipant}
+                      >
+                        +
+                      </button>
+                    )}
+                  {participants.length > 1 && (
+                    <button
+                      type="button"
+                      className="btn btn-xs font-extrabold text-base rounded-full text-whtprmy bg-rdprmy flex border-none text-center"
+                      onClick={() => handleDeleteParticipant(index)}
+                    >
+                      -
+                    </button>
+                  )}
+                </div>
+              </React.Fragment>
+            ))}
           </form>
           <div className="modal-action pt-7">
             <button className="btn btn-sm text-whtprmy bg-rdprmy border-none">
