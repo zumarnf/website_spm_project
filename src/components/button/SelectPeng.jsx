@@ -3,12 +3,13 @@ import React from "react";
 const SelectPeng = () => {
   return (
     <>
-      <select className="select select-bordered w-36 max-w-xs bg-whtprmy text-blckprmy select-sm text-sm">
+      <select className="select select-bordered w-full max-w-xs bg-whtprmy text-blckprmy select-sm text-sm">
         <option disabled selected>
           Cari
         </option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
+        <option>NIMAAA</option>
+        <option>Nama</option>
+        <option>Judul</option>
       </select>
     </>
   );

@@ -60,7 +60,7 @@ const TablePeng = () => {
               <input
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs"
+                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-44 max-w-xs"
               />
               <SelectPeng />
               <BtnSearchPeng />

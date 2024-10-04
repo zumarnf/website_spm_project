@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCog } from "react-icons/fa"; // Import ikon setting dari react-icons
+import { FaCog } from "react-icons/fa";
 
 const ContainerProfile = () => {
   return (
@@ -13,12 +13,11 @@ const ContainerProfile = () => {
           </div>
         </div>
         <div className="pr-5">
-          {/* Kotak rounded kecil dengan icon setting */}
           <button
             className="bg-rdprmy p-2 rounded-full"
             onClick={() => document.getElementById("my_modal_3").showModal()}
           >
-            <FaCog className="text-whtprmy text-lg" /> {/* Icon Setting */}
+            <FaCog className="text-whtprmy text-lg" />
           </button>
         </div>
       </div>

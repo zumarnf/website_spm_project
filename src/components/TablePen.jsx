@@ -7,6 +7,8 @@ import BtnInputPen from "./button/BtnInputPen";
 import PaginationPen from "./PaginationPen";
 import InputPenModal from "./modal/InputPenModal";
 import InputPenMaha from "./modal/InputPenMaha";
+import { HiDotsCircleHorizontal } from "react-icons/hi";
+import DetailPenModal from "./modal/DetailPenModal";
 
 const TablePen = () => {
   const [isInputPenModalVisible, setInputPenModalVisible] = useState(false);
@@ -60,7 +62,7 @@ const TablePen = () => {
               <input
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs"
+                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-44 max-w-xs"
               />
               <SelectPen />
               <BtnSearchPen />
@@ -72,24 +74,33 @@ const TablePen = () => {
                 <thead className="bg-whtprmy text-blckprmy">
                   <tr className="bg-whtprmy">
                     <th></th>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>Favorite Color</th>
-                    <th>Favorite Color</th>
-                    <th>Favorite Color</th>
-                    <th>Favorite Color</th>
+                    <th>Judul Penelitian</th>
+                    <th>Tanggal</th>
+                    <th>Nama Ketua</th>
+                    <th>Bidang</th>
+                    <th>Skema</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th>1</th>
                     <td>Cy Ganderton</td>
-                    <td>Quality Control Specialist akdbaskdakdaskdaskjdakda</td>
+                    <td>Quality Control Specialist</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button
+                        onClick={() =>
+                          document.getElementById("my_modal_9").showModal()
+                        }
+                      >
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
+                  <DetailPenModal />
 
                   <tr>
                     <th>2</th>
@@ -98,7 +109,11 @@ const TablePen = () => {
                     <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
 
                   <tr>
@@ -108,7 +123,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                   <tr>
                     <th>3</th>
@@ -117,7 +136,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                   <tr>
                     <th>3</th>
@@ -126,7 +149,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                   <tr>
                     <th>3</th>
@@ -135,7 +162,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                   <tr>
                     <th>3</th>
@@ -144,7 +175,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                   <tr>
                     <th>3</th>
@@ -153,7 +188,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                   <tr>
                     <th>3</th>
@@ -162,7 +201,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                   <tr>
                     <th>3</th>
@@ -171,7 +214,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                   <tr>
                     <th>3</th>
@@ -180,7 +227,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                   <tr>
                     <th>3</th>
@@ -189,7 +240,11 @@ const TablePen = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button>
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
                 </tbody>
               </table>
