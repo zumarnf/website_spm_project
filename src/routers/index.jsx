@@ -3,6 +3,9 @@ import LoginPage from "../pages/LoginPage";
 import HomeMenu from "../pages/HomeMenu";
 import Penelitian from "../pages/Penelitian";
 import Pengabdian from "../pages/Pengabdian";
+import Mahasiswa from "../pages/Mahasiswa";
+import Dosen from "../pages/Dosen";
+import Prestasi from "../pages/Prestasi";
 
 export const router = createBrowserRouter([
   {
@@ -20,5 +23,17 @@ export const router = createBrowserRouter([
   {
     path: "/pengabdian",
     element: <Pengabdian />,
+  },
+  {
+    path: "/mahasiswa",
+    element: <Mahasiswa />,
+  },
+  {
+    path: "/dosen",
+    element: <Dosen />,
+  },
+  {
+    path: "/prestasi",
+    element: <Prestasi />,
   },
 ]);
