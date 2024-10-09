@@ -6,6 +6,7 @@ import Pengabdian from "../pages/Pengabdian";
 import Mahasiswa from "../pages/Mahasiswa";
 import Dosen from "../pages/Dosen";
 import Prestasi from "../pages/Prestasi";
+import Publikasi from "../pages/Publikasi";
 
 export const router = createBrowserRouter([
   {
@@ -35,5 +36,9 @@ export const router = createBrowserRouter([
   {
     path: "/prestasi",
     element: <Prestasi />,
+  },
+  {
+    path: "/penelitian/publikasi",
+    element: <Publikasi />,
   },
 ]);

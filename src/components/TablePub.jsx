@@ -1,37 +1,37 @@
 import React, { useState } from "react";
 import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
-import BtnSearchPen from "./button/BtnSearchPen";
-import SelectPen from "./button/SelectPen";
-import BtnInputPen from "./button/BtnInputPen";
+import BtnSearchPub from "./button/BtnSearchPub";
+import SelectPub from "./button/SelectPub";
+import BtnInputPub from "./button/BtnInputPub";
 import PaginationPen from "./PaginationPen";
-import InputPenModal from "./modal/InputPenModal";
-import InputPenMaha from "./modal/InputPenMaha";
+import InputPubModal from "./modal/InputPubModal";
+import InputPubMaha from "./modal/InputPubMaha";
 import { HiDotsCircleHorizontal } from "react-icons/hi";
-import DetailPenModal from "./modal/DetailPenModal";
+import DetailPubModal from "./modal/DetailPubModal";
 
-const TablePen = () => {
-  const [isInputPenModalVisible, setInputPenModalVisible] = useState(false);
-  const [isInputPenMahaVisible, setInputPenMahaVisible] = useState(false);
+const TablePub = () => {
+  const [isInputPubModalVisible, setInputPubModalVisible] = useState(false);
+  const [isInputPubMahaVisible, setInputPubMahaVisible] = useState(false);
 
-  const handleOpenInputPenModal = () => {
-    setInputPenModalVisible(true);
-    setInputPenMahaVisible(false); // Sembunyikan InputPenMaha
+  const handleOpenInputPubModal = () => {
+    setInputPubModalVisible(true);
+    setInputPubMahaVisible(false); // Sembunyikan InputPenMaha
   };
 
   const handleSwitchToMaha = () => {
-    setInputPenModalVisible(false); // Sembunyikan InputPenModal
-    setInputPenMahaVisible(true); // Tampilkan InputPenMaha
+    setInputPubModalVisible(false); // Sembunyikan InputPenModal
+    setInputPubMahaVisible(true); // Tampilkan InputPenMaha
   };
 
-  const handleBackToModalPen = () => {
-    setInputPenMahaVisible(false); // Sembunyikan InputPenMaha
-    setInputPenModalVisible(true); // Tampilkan InputPenModal
+  const handleBackToModalPub = () => {
+    setInputPubMahaVisible(false); // Sembunyikan InputPenMaha
+    setInputPubModalVisible(true); // Tampilkan InputPenModal
   };
 
   const handleCloseModals = () => {
-    setInputPenModalVisible(false);
-    setInputPenMahaVisible(false);
+    setInputPubModalVisible(false);
+    setInputPubMahaVisible(false);
   };
   return (
     <>
@@ -46,16 +46,16 @@ const TablePen = () => {
               </h1>
             </div>
             <div className="flex flex-row gap-3 pr-3 justify-center items-center">
-              <BtnInputPen onClick={handleOpenInputPenModal} />
-              {isInputPenModalVisible && (
-                <InputPenModal
+              <BtnInputPub onClick={handleOpenInputPubModal} />
+              {isInputPubModalVisible && (
+                <InputPubModal
                   onSwitch={handleSwitchToMaha}
                   onClose={handleCloseModals}
                 />
               )}
-              {isInputPenMahaVisible && (
-                <InputPenMaha
-                  onBack={handleBackToModalPen}
+              {isInputPubMahaVisible && (
+                <InputPubMaha
+                  onBack={handleBackToModalPub}
                   onClose={handleCloseModals}
                 />
               )}
@@ -64,8 +64,8 @@ const TablePen = () => {
                 placeholder="Type here"
                 className="input input-bordered border-blckprmy bg-whtprmy input-sm w-44 max-w-xs"
               />
-              <SelectPen />
-              <BtnSearchPen />
+              <SelectPub />
+              <BtnSearchPub />
             </div>
           </div>
           <div className="bg-whtprmy px-6">
@@ -93,14 +93,14 @@ const TablePen = () => {
                     <th className="flex justify-center text-center">
                       <button
                         onClick={() =>
-                          document.getElementById("my_modal_9").showModal()
+                          document.getElementById("my_modal_10").showModal()
                         }
                       >
                         <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
                       </button>
                     </th>
                   </tr>
-                  <DetailPenModal />
+                  <DetailPubModal />
 
                   <tr>
                     <th>2</th>
@@ -251,8 +251,8 @@ const TablePen = () => {
             </div>
           </div>
           <div className="flex px-10 text-sm pt-2">
-            <a className="link link-primary" href="/penelitian/publikasi">
-              Data Publikasi
+            <a className="link link-primary" href="/penelitian">
+              Data Penelitian
             </a>
           </div>
 
@@ -265,4 +265,4 @@ const TablePen = () => {
   );
 };
 
-export default TablePen;
+export default TablePub;

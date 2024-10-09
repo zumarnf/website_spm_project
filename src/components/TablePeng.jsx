@@ -72,12 +72,11 @@ const TablePeng = () => {
                 <thead className="bg-whtprmy text-blckprmy">
                   <tr className="bg-whtprmy">
                     <th></th>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>Favorite Color</th>
-                    <th>Favorite Color</th>
-                    <th>Favorite Color</th>
-                    <th>Favorite Color</th>
+                    <th>Judul</th>
+                    <th>Bidang</th>
+                    <th>Rentan Waktu</th>
+                    <th>Nama Ketua</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -85,7 +84,6 @@ const TablePeng = () => {
                     <th>1</th>
                     <td>Cy Ganderton</td>
                     <td>Quality Control Specialist akdbaskdakdaskdaskjdakda</td>
-                    <td>Blue</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <td>Blue</td>
@@ -98,7 +96,6 @@ const TablePeng = () => {
                     <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
                   </tr>
 
                   <tr>
@@ -108,23 +105,12 @@ const TablePeng = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
                   </tr>
                   <tr>
                     <th>3</th>
                     <td>Brice Swyre</td>
                     <td>Tax Accountant</td>
                     <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
                     <td>Blue</td>
                     <td>Blue</td>
                   </tr>
@@ -135,23 +121,12 @@ const TablePeng = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
                   </tr>
                   <tr>
                     <th>3</th>
                     <td>Brice Swyre</td>
                     <td>Tax Accountant</td>
                     <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
                     <td>Blue</td>
                     <td>Blue</td>
                   </tr>
@@ -162,6 +137,13 @@ const TablePeng = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
+                  </tr>
+                  <tr>
+                    <th>3</th>
+                    <td>Brice Swyre</td>
+                    <td>Tax Accountant</td>
+                    <td>Red</td>
+                    <td>Blue</td>
                     <td>Blue</td>
                   </tr>
                   <tr>
@@ -171,6 +153,13 @@ const TablePeng = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
+                  </tr>
+                  <tr>
+                    <th>3</th>
+                    <td>Brice Swyre</td>
+                    <td>Tax Accountant</td>
+                    <td>Red</td>
+                    <td>Blue</td>
                     <td>Blue</td>
                   </tr>
                   <tr>
@@ -180,14 +169,12 @@ const TablePeng = () => {
                     <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <td>Blue</td>
                   </tr>
                   <tr>
                     <th>3</th>
                     <td>Brice Swyre</td>
                     <td>Tax Accountant</td>
                     <td>Red</td>
-                    <td>Blue</td>
                     <td>Blue</td>
                     <td>Blue</td>
                   </tr>
