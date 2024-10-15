@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Sidebar } from "flowbite-react";
 import {
   HiChartPie,
@@ -16,13 +16,15 @@ import { useState, useEffect } from "react";
 
 const SidebarMen = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   // State untuk mengelola apakah kategori Riset terbuka
   const [isRisetOpen, setIsRisetOpen] = useState(false);
 
   // Fungsi untuk memeriksa apakah suatu link aktif
   const isActive = (pathname, href) => {
-    return pathname === href ? "bg-rdprmy text-whtprmy" : "";
+    // Aktifkan jika pathname adalah href atau sub-path dari href
+    return pathname.startsWith(href) ? "bg-rdprmy text-whtprmy" : "";
   };
 
   // UseEffect untuk mengatur visibilitas kategori Riset berdasarkan halaman yang aktif
@@ -30,13 +32,19 @@ const SidebarMen = () => {
     // Jika halaman aktif adalah bagian dari kategori Riset, buka kategori
     if (
       location.pathname === "/penelitian" ||
-      location.pathname === "/pengabdian"
+      location.pathname === "/pengabdian" ||
+      location.pathname === "/penelitian/publikasi"
     ) {
       setIsRisetOpen(true);
     } else {
       setIsRisetOpen(false);
     }
   }, [location.pathname]);
+
+  const handleClick = (e, href) => {
+    e.preventDefault();
+    navigate(href); // Lakukan navigasi manual setelah preventDefault
+  };
 
   return (
     <div className="pl-6 py-5 bg-whtprmy h-full">
@@ -57,6 +65,7 @@ const SidebarMen = () => {
                 location.pathname,
                 "/home"
               )}`}
+              onClick={(e) => handleClick(e, "/home")}
             >
               <div className="flex flex-row">
                 <HiChartPie
@@ -97,6 +106,7 @@ const SidebarMen = () => {
                   location.pathname,
                   "/penelitian"
                 )}`}
+                onClick={(e) => handleClick(e, "/penelitian")}
               >
                 <div className="flex flex-row">
                   <HiDocument
@@ -114,6 +124,7 @@ const SidebarMen = () => {
                   location.pathname,
                   "/pengabdian"
                 )}`}
+                onClick={(e) => handleClick(e, "/pengabdian")}
               >
                 <div className="flex flex-row">
                   <HiHand
@@ -133,6 +144,7 @@ const SidebarMen = () => {
                 location.pathname,
                 "/mahasiswa"
               )}`}
+              onClick={(e) => handleClick(e, "/mahasiswa")}
             >
               <div className="flex flex-row">
                 <HiAcademicCap className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
@@ -145,6 +157,7 @@ const SidebarMen = () => {
                 location.pathname,
                 "/dosen"
               )}`}
+              onClick={(e) => handleClick(e, "/dosen")}
             >
               <div className="flex flex-row">
                 <HiUser className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
@@ -157,6 +170,7 @@ const SidebarMen = () => {
                 location.pathname,
                 "/penelitian-unggulan"
               )}`}
+              onClick={(e) => handleClick(e, "/penelitian-unggulan")}
             >
               <div className="flex flex-row">
                 <HiStar className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />

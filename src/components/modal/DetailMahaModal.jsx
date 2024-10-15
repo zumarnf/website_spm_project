@@ -1,9 +1,9 @@
 import React from "react";
 
-const DetailPengModel = () => {
+const DetailMahaModal = () => {
   return (
     <>
-      <dialog id="my_modal_11" className="modal modal-bottom sm:modal-middle">
+      <dialog id="my_modal_12" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Hello!</h3>
           <p className="py-4">
@@ -20,4 +20,4 @@ const DetailPengModel = () => {
   );
 };
 
-export default DetailPengModel;
+export default DetailMahaModal;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
 import BtnSearchPen from "./button/BtnSearchPen";
@@ -13,6 +14,7 @@ import DetailPenModal from "./modal/DetailPenModal";
 const TablePen = () => {
   const [isInputPenModalVisible, setInputPenModalVisible] = useState(false);
   const [isInputPenMahaVisible, setInputPenMahaVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpenInputPenModal = () => {
     setInputPenModalVisible(true);
@@ -33,12 +35,18 @@ const TablePen = () => {
     setInputPenModalVisible(false);
     setInputPenMahaVisible(false);
   };
+
+  const handleLinkClick = (e) => {
+    e.preventDefault(); // Mencegah perilaku default link
+    navigate("/penelitian/publikasi"); // Arahkan ke halaman publikasi secara manual
+  };
+
   return (
     <>
       <div className="max-h-screen flex flex-col pr-5 pb-5 overflow-auto">
         <ContainerProfile />
         <MenuModal />
-        <div className="h-full w-full border border-blckprmy rounded-xl p-4">
+        <div className="w-full border border-blckprmy rounded-xl p-4">
           <div className="flex justify-between pb-3">
             <div className="px-7 py-4">
               <h1 className="text-2xl font-bold text-blckprmy">
@@ -69,7 +77,7 @@ const TablePen = () => {
             </div>
           </div>
           <div className="bg-whtprmy px-6">
-            <div className="overflow-x-auto max-h-80 text-blckprmy bg-whtprmy">
+            <div className="overflow-x-auto h-80 text-blckprmy bg-whtprmy">
               <table className="table table-pin-rows">
                 <thead className="bg-whtprmy text-blckprmy">
                   <tr className="bg-whtprmy">
@@ -101,7 +109,6 @@ const TablePen = () => {
                     </th>
                   </tr>
                   <DetailPenModal />
-
                   <tr>
                     <th>2</th>
                     <td>Hart Hagerty</td>
@@ -115,12 +122,11 @@ const TablePen = () => {
                       </button>
                     </th>
                   </tr>
-
                   <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
+                    <th>2</th>
+                    <td>Hart Hagerty</td>
+                    <td>Desktop Support Technician</td>
+                    <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
@@ -130,10 +136,10 @@ const TablePen = () => {
                     </th>
                   </tr>
                   <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
+                    <th>2</th>
+                    <td>Hart Hagerty</td>
+                    <td>Desktop Support Technician</td>
+                    <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
@@ -143,10 +149,10 @@ const TablePen = () => {
                     </th>
                   </tr>
                   <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
+                    <th>2</th>
+                    <td>Hart Hagerty</td>
+                    <td>Desktop Support Technician</td>
+                    <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
@@ -156,10 +162,10 @@ const TablePen = () => {
                     </th>
                   </tr>
                   <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
+                    <th>2</th>
+                    <td>Hart Hagerty</td>
+                    <td>Desktop Support Technician</td>
+                    <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
@@ -169,10 +175,10 @@ const TablePen = () => {
                     </th>
                   </tr>
                   <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
+                    <th>2</th>
+                    <td>Hart Hagerty</td>
+                    <td>Desktop Support Technician</td>
+                    <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
@@ -182,10 +188,10 @@ const TablePen = () => {
                     </th>
                   </tr>
                   <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
+                    <th>2</th>
+                    <td>Hart Hagerty</td>
+                    <td>Desktop Support Technician</td>
+                    <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
@@ -195,10 +201,10 @@ const TablePen = () => {
                     </th>
                   </tr>
                   <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
+                    <th>2</th>
+                    <td>Hart Hagerty</td>
+                    <td>Desktop Support Technician</td>
+                    <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
@@ -208,23 +214,10 @@ const TablePen = () => {
                     </th>
                   </tr>
                   <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
+                    <th>2</th>
+                    <td>Hart Hagerty</td>
+                    <td>Desktop Support Technician</td>
+                    <td>Purple</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
@@ -251,11 +244,14 @@ const TablePen = () => {
             </div>
           </div>
           <div className="flex px-10 text-sm pt-2">
-            <a className="link link-primary" href="/penelitian/publikasi">
+            <a
+              className="link link-primary"
+              href="/penelitian/publikasi"
+              onClick={handleLinkClick}
+            >
               Data Publikasi
             </a>
           </div>
-
           <div className="px-6 flex justify-center">
             <PaginationPen />
           </div>

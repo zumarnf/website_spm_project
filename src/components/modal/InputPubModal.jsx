@@ -28,16 +28,25 @@ const InputPubModal = ({ onClose }) => {
       {isModalPubVisible && (
         <dialog
           id="my_modal_11"
-          className="modal modal-bottom sm:modal-middle w-full overflow-hidden"
+          className="modal modal-bottom sm:modal-middle w-full"
           open
         >
-          <div className="modal-box bg-whtprmy text-blckprmy">
-            <h3 className="font-bold text-lg mb-4">Input Penelitian</h3>
-            <form className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
+          <div className="modal-box bg-whtprmy text-blckprmy max-h-[95vh] overflow-y-auto">
+            <div className="font-bold text-lg sticky top-0 left-0 z-10 w-full bg-whtprmy p-4">
+              Input Publikasi
+            </div>
+
+            <form className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm pt-5">
               <label className="font-semibold">Judul Penelitian</label>
               <input
                 type="text"
                 placeholder="Masukkan judul penelitian"
+                className="input input-bordered w-full bg-whtprmy input-sm"
+              />
+              <label className="font-semibold">Nama Jurnal</label>
+              <input
+                type="text"
+                placeholder="Masukkan nama jurnal"
                 className="input input-bordered w-full bg-whtprmy input-sm"
               />
 
@@ -96,7 +105,8 @@ const InputPubModal = ({ onClose }) => {
                 className="input input-bordered w-full bg-whtprmy input-sm"
               />
             </form>
-            <div className="modal-action mt-4 justify-center gap-3">
+
+            <div className="modal-action mt-4 justify-center gap-3 sticky bottom-0 left-0 z-10 w-full bg-whtprmy p-4 shadow-md">
               <button
                 className="btn bg-rdprmy text-whtprmy border-none btn-sm px-4"
                 onClick={handleSubmit}

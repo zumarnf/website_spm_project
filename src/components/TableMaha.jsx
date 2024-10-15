@@ -1,38 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
 import BtnSearchPeng from "./button/BtnSearchPeng";
 import SelectPeng from "./button/SelectPeng";
-import BtnInputPeng from "./button/BtnInputPeng";
 import PaginationPen from "./PaginationPen";
-import InputPengModal from "./modal/InputPengModal";
-import InputPengMaha from "./modal/InputPengMaha";
 import { HiDotsCircleHorizontal } from "react-icons/hi";
 import DetailPengModel from "./modal/DetailPengModel";
+import BtnInputMaha from "./button/BtnInputMaha";
+import InputMahaModal from "./modal/InputMahaModal";
+import DetailMahaModal from "./modal/DetailMahaModal";
 
-const TablePeng = () => {
-  const [isInputPengModalVisible, setInputPengModalVisible] = useState(false);
-  const [isInputPengMahaVisible, setInputPengMahaVisible] = useState(false);
-
-  const handleOpenInputPengModal = () => {
-    setInputPengModalVisible(true);
-    setInputPengMahaVisible(false); // Sembunyikan InputPenMaha
-  };
-
-  const handleSwitchToMaha = () => {
-    setInputPengModalVisible(false); // Sembunyikan InputPenModal
-    setInputPengMahaVisible(true); // Tampilkan InputPenMaha
-  };
-
-  const handleBackToModalPeng = () => {
-    setInputPengMahaVisible(false); // Sembunyikan InputPenMaha
-    setInputPengModalVisible(true); // Tampilkan InputPenModal
-  };
-
-  const handleCloseModals = () => {
-    setInputPengModalVisible(false);
-    setInputPengMahaVisible(false);
-  };
+const TableMaha = () => {
   return (
     <>
       <div className="max-h-screen flex flex-col pr-5 pb-5 overflow-auto">
@@ -46,19 +24,8 @@ const TablePeng = () => {
               </h1>
             </div>
             <div className="flex flex-row gap-3 pr-3 justify-center items-center">
-              <BtnInputPeng onClick={handleOpenInputPengModal} />
-              {isInputPengModalVisible && (
-                <InputPengModal
-                  onSwitch={handleSwitchToMaha}
-                  onClose={handleCloseModals}
-                />
-              )}
-              {isInputPengMahaVisible && (
-                <InputPengMaha
-                  onBack={handleBackToModalPeng}
-                  onClose={handleCloseModals}
-                />
-              )}
+              <BtnInputMaha />
+              <InputMahaModal />
               <input
                 type="text"
                 placeholder="Type here"
@@ -91,7 +58,7 @@ const TablePeng = () => {
                     <th className="flex justify-center text-center">
                       <button
                         onClick={() =>
-                          document.getElementById("my_modal_11").showModal()
+                          document.getElementById("my_modal_12").showModal()
                         }
                       >
                         <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
@@ -108,7 +75,7 @@ const TablePeng = () => {
                     <th className="flex justify-center text-center">
                       <button
                         onClick={() =>
-                          document.getElementById("my_modal_11").showModal()
+                          document.getElementById("my_modal_12").showModal()
                         }
                       >
                         <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
@@ -198,7 +165,7 @@ const TablePeng = () => {
                   </tr>
                 </tbody>
               </table>
-              <DetailPengModel />
+              <DetailMahaModal />
             </div>
           </div>
           <div className="px-6 flex justify-center pt-5">
@@ -210,4 +177,4 @@ const TablePeng = () => {
   );
 };
 
-export default TablePeng;
+export default TableMaha;

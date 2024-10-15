@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
 import BtnSearchPub from "./button/BtnSearchPub";
@@ -13,26 +14,32 @@ import DetailPubModal from "./modal/DetailPubModal";
 const TablePub = () => {
   const [isInputPubModalVisible, setInputPubModalVisible] = useState(false);
   const [isInputPubMahaVisible, setInputPubMahaVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpenInputPubModal = () => {
     setInputPubModalVisible(true);
-    setInputPubMahaVisible(false); // Sembunyikan InputPenMaha
+    setInputPubMahaVisible(false); // Sembunyikan InputPubMaha
   };
 
   const handleSwitchToMaha = () => {
-    setInputPubModalVisible(false); // Sembunyikan InputPenModal
-    setInputPubMahaVisible(true); // Tampilkan InputPenMaha
+    setInputPubModalVisible(false); // Sembunyikan InputPubModal
+    setInputPubMahaVisible(true); // Tampilkan InputPubMaha
   };
 
   const handleBackToModalPub = () => {
-    setInputPubMahaVisible(false); // Sembunyikan InputPenMaha
-    setInputPubModalVisible(true); // Tampilkan InputPenModal
+    setInputPubMahaVisible(false); // Sembunyikan InputPubMaha
+    setInputPubModalVisible(true); // Tampilkan InputPubModal
   };
 
   const handleCloseModals = () => {
     setInputPubModalVisible(false);
     setInputPubMahaVisible(false);
   };
+  const handleLinkClick = (e) => {
+    e.preventDefault(); // Mencegah perilaku default link
+    navigate("/penelitian"); // Arahkan ke halaman publikasi secara manual
+  };
+
   return (
     <>
       <div className="max-h-screen flex flex-col pr-5 pb-5 overflow-auto">
@@ -42,7 +49,7 @@ const TablePub = () => {
           <div className="flex justify-between pb-3">
             <div className="px-7 py-4">
               <h1 className="text-2xl font-bold text-blckprmy">
-                Data Penelitian
+                Data Publikasi
               </h1>
             </div>
             <div className="flex flex-row gap-3 pr-3 justify-center items-center">
@@ -69,12 +76,12 @@ const TablePub = () => {
             </div>
           </div>
           <div className="bg-whtprmy px-6">
-            <div className="overflow-x-auto max-h-80 text-blckprmy bg-whtprmy">
+            <div className="overflow-x-auto h-80 text-blckprmy bg-whtprmy">
               <table className="table table-pin-rows">
                 <thead className="bg-whtprmy text-blckprmy">
                   <tr className="bg-whtprmy">
                     <th></th>
-                    <th>Judul Penelitian</th>
+                    <th>Judul Publikasi</th>
                     <th>Tanggal</th>
                     <th>Nama Ketua</th>
                     <th>Bidang</th>
@@ -91,140 +98,17 @@ const TablePub = () => {
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
-                      <button
-                        onClick={() =>
-                          document.getElementById("my_modal_10").showModal()
-                        }
-                      >
+                      <button>
                         <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
                       </button>
                     </th>
                   </tr>
                   <DetailPubModal />
-
                   <tr>
                     <th>2</th>
                     <td>Hart Hagerty</td>
                     <td>Desktop Support Technician</td>
                     <td>Purple</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <th className="flex justify-center text-center">
-                      <button>
-                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
-                      </button>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
                     <td>Blue</td>
                     <td>Blue</td>
                     <th className="flex justify-center text-center">
@@ -251,11 +135,14 @@ const TablePub = () => {
             </div>
           </div>
           <div className="flex px-10 text-sm pt-2">
-            <a className="link link-primary" href="/penelitian">
+            <a
+              className="link link-primary"
+              href="/penelitian"
+              onClick={handleLinkClick}
+            >
               Data Penelitian
             </a>
           </div>
-
           <div className="px-6 flex justify-center">
             <PaginationPen />
           </div>
