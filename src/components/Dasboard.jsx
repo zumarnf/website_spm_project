@@ -56,7 +56,7 @@ const Dashboard = () => {
             title="Mahasiswa"
             number={200}
             Icon={HiAcademicCap}
-            link="/penjualan"
+            link="/mahasiswa"
             iconColor="text-blckprmy"
           />
           <CardItem

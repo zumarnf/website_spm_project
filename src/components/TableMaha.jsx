@@ -1,16 +1,23 @@
 import React from "react";
 import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
-import BtnSearchPeng from "./button/BtnSearchPeng";
-import SelectPeng from "./button/SelectPeng";
+import BtnSearchMaha from "./button/BtnSearchMaha";
 import PaginationPen from "./PaginationPen";
 import { HiDotsCircleHorizontal } from "react-icons/hi";
-import DetailPengModel from "./modal/DetailPengModel";
 import BtnInputMaha from "./button/BtnInputMaha";
 import InputMahaModal from "./modal/InputMahaModal";
-import DetailMahaModal from "./modal/DetailMahaModal";
+import SelectMaha from "./button/SelectMaha";
+import { useNavigate } from "react-router-dom";
 
 const TableMaha = () => {
+  const navigate = useNavigate();
+
+  // Handle navigation when button is clicked
+  const handleClick = (e, href) => {
+    e.preventDefault();
+    navigate(href); // Navigate to the target route
+  };
+
   return (
     <>
       <div className="max-h-screen flex flex-col pr-5 pb-5 overflow-auto">
@@ -20,7 +27,7 @@ const TableMaha = () => {
           <div className="flex justify-between pb-3">
             <div className="px-7 py-4">
               <h1 className="text-2xl font-bold text-blckprmy">
-                Data Pengabdian
+                Data Mahasiswa
               </h1>
             </div>
             <div className="flex flex-row gap-3 pr-3 justify-center items-center">
@@ -31,8 +38,8 @@ const TableMaha = () => {
                 placeholder="Type here"
                 className="input input-bordered border-blckprmy bg-whtprmy input-sm w-44 max-w-xs"
               />
-              <SelectPeng />
-              <BtnSearchPeng />
+              <SelectMaha />
+              <BtnSearchMaha />
             </div>
           </div>
           <div className="bg-whtprmy px-6">
@@ -41,10 +48,10 @@ const TableMaha = () => {
                 <thead className="bg-whtprmy text-blckprmy">
                   <tr className="bg-whtprmy">
                     <th></th>
-                    <th>Judul</th>
-                    <th>Bidang</th>
-                    <th>Rentan Waktu</th>
-                    <th>Nama Ketua</th>
+                    <th>NIM</th>
+                    <th>Nama</th>
+                    <th>Angkatan</th>
+                    <th>Prodi</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -55,15 +62,15 @@ const TableMaha = () => {
                     <td>Quality Control Specialist akdbaskdakdaskdaskjdakda</td>
                     <td>Blue</td>
                     <td>Blue</td>
-                    <th className="flex justify-center text-center">
+                    <td className="text-center">
                       <button
-                        onClick={() =>
-                          document.getElementById("my_modal_12").showModal()
+                        onClick={(e) =>
+                          handleClick(e, "/mahasiswa/detailpenelitian")
                         }
                       >
                         <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
                       </button>
-                    </th>
+                    </td>
                   </tr>
 
                   <tr>
@@ -72,100 +79,18 @@ const TableMaha = () => {
                     <td>Desktop Support Technician</td>
                     <td>Purple</td>
                     <td>Blue</td>
-                    <th className="flex justify-center text-center">
+                    <td className="text-center">
                       <button
-                        onClick={() =>
-                          document.getElementById("my_modal_12").showModal()
+                        onClick={(e) =>
+                          handleClick(e, "/mahasiswa/detailpenelitian")
                         }
                       >
                         <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
                       </button>
-                    </th>
-                  </tr>
-
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
+                    </td>
                   </tr>
                 </tbody>
               </table>
-              <DetailMahaModal />
             </div>
           </div>
           <div className="px-6 flex justify-center pt-5">

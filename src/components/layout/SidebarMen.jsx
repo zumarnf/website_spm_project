@@ -147,7 +147,12 @@ const SidebarMen = () => {
               onClick={(e) => handleClick(e, "/mahasiswa")}
             >
               <div className="flex flex-row">
-                <HiAcademicCap className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <HiAcademicCap
+                  className={`h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy ${isActive(
+                    location.pathname,
+                    "/mahasiswa"
+                  )}`}
+                />
                 <span className="text-base">Mahasiswa</span>
               </div>
             </Sidebar.Item>

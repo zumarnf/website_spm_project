@@ -1,17 +1,18 @@
 import React from "react";
 
-const SelectMaha = () => {
+const SelectDetailMahaSearch = () => {
   return (
     <>
       <select className="select select-bordered w-full max-w-xs bg-whtprmy text-blckprmy select-sm text-sm">
         <option disabled selected>
           Cari
         </option>
-        <option>NIM</option>
-        <option>Nama</option>
+        <option>Judul</option>
+        <option>Nomor</option>
+        <option>Tahun</option>
       </select>
     </>
   );
 };
 
-export default SelectMaha;
+export default SelectDetailMahaSearch;

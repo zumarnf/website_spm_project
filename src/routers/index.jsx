@@ -7,6 +7,7 @@ import Mahasiswa from "../pages/Mahasiswa";
 import Dosen from "../pages/Dosen";
 import Prestasi from "../pages/Prestasi";
 import Publikasi from "../pages/Publikasi";
+import DetailMahasiswaPen from "../pages/DetailMahasiswaPen";
 
 export const router = createBrowserRouter([
   {
@@ -40,5 +41,9 @@ export const router = createBrowserRouter([
   {
     path: "/penelitian/publikasi",
     element: <Publikasi />,
+  },
+  {
+    path: "/mahasiswa/detailpenelitian",
+    element: <DetailMahasiswaPen />,
   },
 ]);

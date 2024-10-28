@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const InputMahaModal = () => {
   // Fungsi untuk menutup modal
@@ -16,69 +16,40 @@ const InputMahaModal = () => {
         <div className="modal-box bg-whtprmy text-blckprmy">
           <h3 className="font-bold text-lg mb-4">Input Penelitian</h3>
           <form className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
-            <label className="font-semibold">Judul Penelitian</label>
-            <input
-              type="text"
-              placeholder="Masukkan judul penelitian"
-              className="input input-bordered w-full bg-whtprmy input-sm"
-            />
-
-            <label className="font-semibold">Tanggal</label>
-            <input
-              type="date"
-              className="input input-bordered w-full bg-whtprmy input-sm"
-            />
-
-            <label className="font-semibold">Nomor SK</label>
-            <input
-              type="text"
-              placeholder="Masukkan nomor SK"
-              className="input input-bordered w-full bg-whtprmy input-sm"
-            />
-
-            <label className="font-semibold">Nomor Kontrak</label>
-            <input
-              type="text"
-              placeholder="Masukkan nomor kontrak"
-              className="input input-bordered w-full bg-whtprmy input-sm"
-            />
-
-            <label className="font-semibold">Skema</label>
-            <input
-              type="text"
-              placeholder="Masukkan skema"
-              className="input input-bordered w-full bg-whtprmy input-sm"
-            />
-
-            <label className="font-semibold">Bidang</label>
-            <input
-              type="text"
-              placeholder="Masukkan bidang"
-              className="input input-bordered w-full bg-whtprmy input-sm"
-            />
-
-            <label className="font-semibold">Dana</label>
+            <label className="font-semibold">NIM</label>
             <input
               type="number"
-              placeholder="Masukkan dana"
+              placeholder="Masukkan NIM"
+              className="input input-bordered w-full bg-whtprmy input-sm appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <label className="font-semibold">Nama</label>
+            <input
+              type="text"
+              placeholder="Masukkan Nama"
               className="input input-bordered w-full bg-whtprmy input-sm"
             />
 
-            <label className="font-semibold">Sumber Dana</label>
+            <label className="font-semibold">Angkatan</label>
             <input
-              type="text"
-              placeholder="Masukkan sumber dana"
-              className="input input-bordered w-full bg-whtprmy input-sm"
+              type="number"
+              placeholder="Masukkan Angkatan"
+              className="input input-bordered w-full bg-whtprmy input-sm appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            <label className="font-semibold">File</label>
-            <input
-              type="text"
-              placeholder="Masukkan nama file"
-              className="input input-bordered w-full bg-whtprmy input-sm"
-            />
+            <label className="font-semibold">Prodi</label>
+            <select className="select select-bordered w-full max-w-xs bg-whtprmy text-blckprmy select-sm text-sm">
+              <option disabled selected>
+                Pilih Prodi
+              </option>
+              <option>NIM</option>
+              <option>Nama</option>
+              <option>NIM</option>
+              <option>Nama</option>
+              <option>NIM</option>
+            </select>
           </form>
-          <div className="modal-action mt-4 justify-center gap-3">
+          <div className="modal-action pt-12 justify-center gap-3">
             <button
               type="button"
               onClick={closeModal}
