@@ -165,7 +165,12 @@ const SidebarMen = () => {
               onClick={(e) => handleClick(e, "/dosen")}
             >
               <div className="flex flex-row">
-                <HiUser className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <HiUser
+                  className={`h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy ${isActive(
+                    location.pathname,
+                    "/dosen"
+                  )}`}
+                />
                 <span className="text-base">Dosen</span>
               </div>
             </Sidebar.Item>

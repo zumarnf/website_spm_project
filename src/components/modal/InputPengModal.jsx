@@ -24,6 +24,7 @@ const InputPengModal = ({ onClose }) => {
   };
   return (
     <>
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
       {isModalPengVisible && (
         <dialog
           id="my_modal_6"

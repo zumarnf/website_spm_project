@@ -19,6 +19,7 @@ const InputPengMaha = ({ onClose }) => {
     const updatedParticipants = participants.filter((_, i) => i !== index);
     setParticipants(updatedParticipants);
   };
+
   return (
     <>
       <dialog
@@ -42,33 +43,38 @@ const InputPengMaha = ({ onClose }) => {
                   value={participant.name}
                   onChange={(e) => handleChange(index, "name", e.target.value)}
                 />
-                <div className="flex flex-row gap-2 justify-center items-center">
-                  <input
-                    type="text"
-                    placeholder="NIM/NIP"
-                    className="input input-bordered w-full bg-whtprmy input-sm"
-                    value={participant.id}
-                    onChange={(e) => handleChange(index, "id", e.target.value)}
-                  />
+                <div className="flex flex-col items-center gap-2">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      placeholder="NIM/NIP"
+                      className="input input-bordered w-full bg-whtprmy input-sm"
+                      value={participant.id}
+                      onChange={(e) =>
+                        handleChange(index, "id", e.target.value)
+                      }
+                    />
+                    {participants.length > 1 && (
+                      <button
+                        type="button"
+                        className="btn btn-xs font-extrabold text-base rounded-full text-whtprmy bg-rdprmy flex border-none text-center"
+                        onClick={() => handleDeleteParticipant(index)}
+                      >
+                        -
+                      </button>
+                    )}
+                  </div>
+                  {/* Tombol Add ditempatkan di bawah tombol Delete dan diposisikan ke kanan */}
                   {index === participants.length - 1 &&
                     participants.length < 5 && (
                       <button
                         type="button"
-                        className="btn btn-xs font-extrabold text-base rounded-full text-whtprmy bg-rdprmy flex border-none text-center"
+                        className="btn btn-xs font-extrabold text-base rounded-full text-whtprmy bg-rdprmy flex border-none text-center mt-2 ml-auto"
                         onClick={handleAddParticipant}
                       >
                         +
                       </button>
                     )}
-                  {participants.length > 1 && (
-                    <button
-                      type="button"
-                      className="btn btn-xs font-extrabold text-base rounded-full text-whtprmy bg-rdprmy flex border-none text-center"
-                      onClick={() => handleDeleteParticipant(index)}
-                    >
-                      -
-                    </button>
-                  )}
                 </div>
               </React.Fragment>
             ))}

@@ -6,12 +6,14 @@ import PaginationPen from "./PaginationPen";
 import { useNavigate } from "react-router-dom";
 import SelectDetailMahaCat from "./button/SelectDetailMahaCat";
 import SelectDetailMahaSearch from "./button/SelectDetailMahaSearch";
+import DetailMahaModal from "./modal/DetailMahaModal"; // Import modal
 
 const DetailContainer = () => {
   const navigate = useNavigate();
 
   // Inisialisasi state dengan "Penelitian" sebagai default
   const [judulKategori, setJudulKategori] = useState("Penelitian");
+  const [isModalOpen, setIsModalOpen] = useState(false); // State untuk modal
 
   const handleLinkClick = (e) => {
     e.preventDefault(); // Mencegah perilaku default link
@@ -20,6 +22,14 @@ const DetailContainer = () => {
 
   const handleJudul = (kategori) => {
     setJudulKategori(kategori); // Update judul berdasarkan kategori yang dipilih
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true); // Membuka modal
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // Menutup modal
   };
 
   return (
@@ -51,9 +61,17 @@ const DetailContainer = () => {
             </div>
             <div className="overflow-x-auto h-72 text-blckprmy bg-whtprmy px-4">
               <ul className="list-disc list-inside">
-                <li className="underline">hai</li>
-                <li className="underline">hai</li>
-                <li className="underline">hai</li>
+                {[...Array(3)].map((_, index) => (
+                  <li key={index}>
+                    {/* Menambahkan onClick hanya pada span untuk membatasi area klik */}
+                    <span
+                      className="underline cursor-pointer"
+                      onClick={openModal} // Membuka modal saat teks diklik
+                    >
+                      hai
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -71,6 +89,9 @@ const DetailContainer = () => {
           </div>
         </div>
       </div>
+
+      {/* Render modal dan mengirimkan state */}
+      <DetailMahaModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 };
