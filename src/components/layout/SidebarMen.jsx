@@ -17,19 +17,13 @@ import { useState, useEffect } from "react";
 const SidebarMen = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
-  // State untuk mengelola apakah kategori Riset terbuka
   const [isRisetOpen, setIsRisetOpen] = useState(false);
 
-  // Fungsi untuk memeriksa apakah suatu link aktif
   const isActive = (pathname, href) => {
-    // Aktifkan jika pathname adalah href atau sub-path dari href
     return pathname.startsWith(href) ? "bg-rdprmy text-whtprmy" : "";
   };
 
-  // UseEffect untuk mengatur visibilitas kategori Riset berdasarkan halaman yang aktif
   useEffect(() => {
-    // Jika halaman aktif adalah bagian dari kategori Riset, buka kategori
     if (
       location.pathname === "/penelitian" ||
       location.pathname === "/pengabdian" ||
@@ -43,7 +37,7 @@ const SidebarMen = () => {
 
   const handleClick = (e, href) => {
     e.preventDefault();
-    navigate(href); // Lakukan navigasi manual setelah preventDefault
+    navigate(href);
   };
 
   return (
@@ -77,7 +71,6 @@ const SidebarMen = () => {
                 <span className="text-base">Dashboard</span>
               </div>
             </Sidebar.Item>
-
             {/* Kategori Riset */}
             <Sidebar.Collapse
               className="hover:bg-rdprmy hover:text-whtprmy group"
@@ -87,18 +80,7 @@ const SidebarMen = () => {
                   <span className="text-base">Riset</span>
                 </div>
               }
-              open={isRisetOpen} // Tetap buka jika isRisetOpen true
-              renderChevronIcon={(theme, open) => {
-                const IconComponent = open ? HiOutlineMinusSm : HiOutlinePlusSm;
-                return (
-                  <IconComponent
-                    aria-hidden
-                    className={`h-6 w-6 text-blckprmy hover:text-whtprmy ${
-                      theme.label.icon.open[open ? "on" : "off"]
-                    }`}
-                  />
-                );
-              }}
+              open={isRisetOpen}
             >
               <Sidebar.Item
                 href="/penelitian"
@@ -138,6 +120,7 @@ const SidebarMen = () => {
               </Sidebar.Item>
             </Sidebar.Collapse>
 
+            {/* Additional items */}
             <Sidebar.Item
               href="/mahasiswa"
               className={`hover:bg-rdprmy hover:text-whtprmy group ${isActive(

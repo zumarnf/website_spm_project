@@ -11,17 +11,21 @@ import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
 
 const CardItem = ({ title, number, Icon, link, iconColor }) => (
-  <div className="flex justify-between items-center w-64 h-36 border rounded-2xl p-7 shadow-md">
+  <div className="flex flex-col md:flex-row justify-between items-center w-full h-full border rounded-2xl p-3 md:p-7 shadow-md">
     <div>
-      <h2 className="text-xl font-semibold pb-7 text-blckprmy">{title}</h2>
-      <div className="flex items-center">
-        <Icon className={`text-3xl mr-6 ${iconColor}`} />{" "}
-        <span className="text-3xl font-bold text-blckprmy">{number}</span>
+      <h2 className="text-md md:text-xl font-semibold text-blckprmy">
+        {title}
+      </h2>
+      <div className="flex items-center mt-2 md:mt-7">
+        <Icon className={`text-xl md:text-3xl mr-2 md:mr-6 ${iconColor}`} />
+        <span className="text-xl md:text-3xl font-bold text-blckprmy">
+          {number}
+        </span>
       </div>
     </div>
-    <div className="text-rdprmy">
+    <div className="text-rdprmy mt-3 md:mt-0">
       <Link to={link}>
-        <HiArrowRight className="text-4xl cursor-pointer" />
+        <HiArrowRight className="text-2xl md:text-4xl cursor-pointer" />
       </Link>
     </div>
   </div>
@@ -29,15 +33,18 @@ const CardItem = ({ title, number, Icon, link, iconColor }) => (
 
 const Dashboard = () => {
   return (
-    <div className="h-full flex flex-col pr-5 pb-5 overflow-auto">
+    <div className="h-full flex flex-col px-4 md:px-8 lg:px-10 pb-5 overflow-auto">
       <ContainerProfile />
       <MenuModal />
-      <div className="h-full w-full border border-blckprmy rounded-xl p-4">
-        <div className="px-7 py-4">
-          <h1 className="text-2xl font-bold pb-7 text-blckprmy">Dashboard</h1>
+      {/* Membungkus CardItem dalam kotak responsif */}
+      <div className="w-full border border-blckprmy rounded-xl p-4 md:p-6 lg:p-8 bg-white shadow-lg">
+        <div className="px-4 md:px-7 py-4">
+          <h1 className="text-lg md:text-2xl font-bold pb-5 md:pb-7 text-blckprmy">
+            Dashboard
+          </h1>
         </div>
-        {/* Menggunakan grid untuk tata letak kartu */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-6">
+        {/* Menggunakan grid responsif untuk tata letak CardItem */}
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6 lg:gap-10">
           <CardItem
             title="Penelitian"
             number={190}

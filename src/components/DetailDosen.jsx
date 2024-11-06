@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
-import BtnSearchMaha from "./button/BtnSearchMaha";
 import PaginationPen from "./PaginationPen";
 import { useNavigate } from "react-router-dom";
-import SelectDetailMahaCat from "./button/SelectDetailMahaCat";
-import SelectDetailMahaSearch from "./button/SelectDetailMahaSearch";
-import DetailMahaModal from "./modal/DetailMahaModal";
+import DetailDosModal from "./modal/DetailDosModal";
+import SelectDetailDosCat from "./button/SelectDetailDosCat";
+import SelectDetailDos from "./button/SelectDetailDos";
+import BtnSearchDos from "./button/BtnSearchDos";
 
-const DetailContainer = () => {
+const DetailDosen = () => {
   const navigate = useNavigate();
 
   // Inisialisasi state dengan "Penelitian" sebagai default
@@ -17,7 +17,7 @@ const DetailContainer = () => {
 
   const handleLinkClick = (e) => {
     e.preventDefault(); // Mencegah perilaku default link
-    navigate("/mahasiswa"); // Arahkan ke halaman mahasiswa secara manual
+    navigate("/dosen"); // Arahkan ke halaman mahasiswa secara manual
   };
 
   const handleJudul = (kategori) => {
@@ -25,11 +25,11 @@ const DetailContainer = () => {
   };
 
   const openModal = () => {
-    setIsModalOpen(true); // Membuka modal
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Menutup modal
+    setIsModalOpen(false);
   };
 
   return (
@@ -40,19 +40,17 @@ const DetailContainer = () => {
         <div className="w-full border border-blckprmy rounded-xl p-4">
           <div className="flex justify-between pb-3 pt-4">
             <div className="px-7">
-              <h1 className="text-2xl font-bold text-blckprmy">
-                Nama Mahasiswa
-              </h1>
+              <h1 className="text-2xl font-bold text-blckprmy">Nama Dosen</h1>
             </div>
             <div className="flex flex-row gap-3 pr-3 justify-center items-center">
-              <SelectDetailMahaCat handleJudul={handleJudul} />
+              <SelectDetailDosCat handleJudul={handleJudul} />
               <input
                 type="text"
                 placeholder="Type here"
                 className="input input-bordered border-blckprmy bg-whtprmy input-sm w-44 max-w-xs"
               />
-              <SelectDetailMahaSearch />
-              <BtnSearchMaha />
+              <SelectDetailDos />
+              <BtnSearchDos />
             </div>
           </div>
           <div className="bg-whtprmy px-6">
@@ -77,7 +75,7 @@ const DetailContainer = () => {
           <div className="flex px-10 text-sm pt-2">
             <a
               className="link link-primary"
-              href="/mahasiswa"
+              href="/dosen"
               onClick={handleLinkClick}
             >
               Kembali
@@ -89,9 +87,9 @@ const DetailContainer = () => {
         </div>
       </div>
 
-      <DetailMahaModal isOpen={isModalOpen} onClose={closeModal} />
+      <DetailDosModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 };
 
-export default DetailContainer;
+export default DetailDosen;

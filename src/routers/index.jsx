@@ -8,6 +8,7 @@ import Dosen from "../pages/Dosen";
 import Prestasi from "../pages/Prestasi";
 import Publikasi from "../pages/Publikasi";
 import DetailMahasiswaPen from "../pages/DetailMahasiswaPen";
+import DetailDos from "../pages/DetailDos";
 
 export const router = createBrowserRouter([
   {
@@ -45,5 +46,9 @@ export const router = createBrowserRouter([
   {
     path: "/mahasiswa/detailpenelitian",
     element: <DetailMahasiswaPen />,
+  },
+  {
+    path: "/dosen/detaildosen",
+    element: <DetailDos />,
   },
 ]);

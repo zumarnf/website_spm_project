@@ -63,9 +63,7 @@ const TableDos = () => {
                     <td>Blue</td>
                     <td className="text-center">
                       <button
-                        onClick={(e) =>
-                          handleClick(e, "/mahasiswa/detailpenelitian")
-                        }
+                        onClick={(e) => handleClick(e, "/dosen/detaildosen")}
                       >
                         <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
                       </button>
