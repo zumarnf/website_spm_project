@@ -77,7 +77,7 @@ const Dashboard = () => {
             title="Prestasi"
             number={200}
             Icon={HiStar}
-            link="/penjualan"
+            link="/prestasi"
             iconColor="text-blckprmy"
           />
         </div>

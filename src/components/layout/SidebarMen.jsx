@@ -161,12 +161,17 @@ const SidebarMen = () => {
               href="/penelitian-unggulan"
               className={`hover:bg-rdprmy hover:text-whtprmy group ${isActive(
                 location.pathname,
-                "/penelitian-unggulan"
+                "/prestasi"
               )}`}
-              onClick={(e) => handleClick(e, "/penelitian-unggulan")}
+              onClick={(e) => handleClick(e, "/prestasi")}
             >
               <div className="flex flex-row">
-                <HiStar className="h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy" />
+                <HiStar
+                  className={`h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy ${isActive(
+                    location.pathname,
+                    "/prestasi"
+                  )}`}
+                />
                 <span className="text-base">Prestasi</span>
               </div>
             </Sidebar.Item>
