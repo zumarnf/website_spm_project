@@ -10,45 +10,19 @@ import Publikasi from "../pages/Publikasi";
 import DetailMahasiswaPen from "../pages/DetailMahasiswaPen";
 import DetailDos from "../pages/DetailDos";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <LoginPage />,
-  },
-  {
-    path: "/home",
-    element: <HomeMenu />,
-  },
-  {
-    path: "/penelitian",
-    element: <Penelitian />,
-  },
-  {
-    path: "/pengabdian",
-    element: <Pengabdian />,
-  },
-  {
-    path: "/mahasiswa",
-    element: <Mahasiswa />,
-  },
-  {
-    path: "/dosen",
-    element: <Dosen />,
-  },
-  {
-    path: "/prestasi",
-    element: <Prestasi />,
-  },
-  {
-    path: "/penelitian/publikasi",
-    element: <Publikasi />,
-  },
-  {
-    path: "/mahasiswa/detailpenelitian",
-    element: <DetailMahasiswaPen />,
-  },
-  {
-    path: "/dosen/detaildosen",
-    element: <DetailDos />,
-  },
-]);
+// Definisikan rute dalam array
+const routes = [
+  { path: "/", element: <LoginPage /> },
+  { path: "/home", element: <HomeMenu /> },
+  { path: "/penelitian", element: <Penelitian /> },
+  { path: "/pengabdian", element: <Pengabdian /> },
+  { path: "/mahasiswa", element: <Mahasiswa /> },
+  { path: "/dosen", element: <Dosen /> },
+  { path: "/prestasi", element: <Prestasi /> },
+  { path: "/penelitian/publikasi", element: <Publikasi /> },
+  { path: "/mahasiswa/detailpenelitian", element: <DetailMahasiswaPen /> },
+  { path: "/dosen/detaildosen", element: <DetailDos /> },
+];
+
+// Buat router menggunakan array rute
+export const router = createBrowserRouter(routes);
