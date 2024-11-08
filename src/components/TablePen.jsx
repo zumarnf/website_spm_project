@@ -54,18 +54,17 @@ const TablePen = () => {
               </h1>
             </div>
             <div className="flex flex-col md:flex-row gap-3 pr-3 justify-center items-center">
-              <div className="flex flex-col md:flex-row gap-3">
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs"
-                />
-                <SelectPen />
-                <div className="flex flex-row md:flex-row gap-3">
-                  <BtnSearchPen />
-                  <BtnInputPen onClick={handleOpenInputPenModal} />
-                </div>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs"
+              />
+              <SelectPen />
+              <div className="flex flex-row md:flex-row gap-3">
+                <BtnSearchPen />
+                <BtnInputPen onClick={handleOpenInputPenModal} />
               </div>
+
               {isInputPenModalVisible && (
                 <InputPenModal
                   onSwitch={handleSwitchToMaha}
