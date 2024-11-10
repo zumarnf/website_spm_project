@@ -33,20 +33,31 @@ const TablePeng = () => {
     setInputPengModalVisible(false);
     setInputPengMahaVisible(false);
   };
+
   return (
     <>
       <div className="max-h-screen flex flex-col pr-5 pb-5 overflow-auto">
         <ContainerProfile />
         <MenuModal />
-        <div className="h-full w-full border border-blckprmy rounded-xl p-4">
-          <div className="flex justify-between pb-3">
+        <div className="w-full border border-blckprmy rounded-xl p-4">
+          <div className="flex flex-col md:flex-row justify-between pb-3">
             <div className="px-7 py-4">
               <h1 className="text-2xl font-bold text-blckprmy">
                 Data Pengabdian
               </h1>
             </div>
-            <div className="flex flex-row gap-3 pr-3 justify-center items-center">
-              <BtnInputPeng onClick={handleOpenInputPengModal} />
+            <div className="flex flex-col md:flex-row gap-3 pr-3 justify-center items-center">
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs"
+              />
+              <SelectPeng />
+              <div className="flex flex-row gap-3">
+                <BtnSearchPeng />
+                <BtnInputPeng onClick={handleOpenInputPengModal} />
+              </div>
+
               {isInputPengModalVisible && (
                 <InputPengModal
                   onSwitch={handleSwitchToMaha}
@@ -59,35 +70,30 @@ const TablePeng = () => {
                   onClose={handleCloseModals}
                 />
               )}
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-44 max-w-xs"
-              />
-              <SelectPeng />
-              <BtnSearchPeng />
             </div>
           </div>
           <div className="bg-whtprmy px-6">
             <div className="overflow-x-auto h-80 text-blckprmy bg-whtprmy">
-              <table className="table table-pin-rows">
+              <table className="table table-pin-rows w-full">
                 <thead className="bg-whtprmy text-blckprmy">
                   <tr className="bg-whtprmy">
-                    <th></th>
-                    <th>Judul</th>
-                    <th>Bidang</th>
-                    <th>Rentan Waktu</th>
-                    <th>Nama Ketua</th>
+                    <th className="hidden md:table-cell"></th>
+                    <th className="text-left">Judul</th>
+                    <th className="hidden md:table-cell">Bidang</th>
+                    <th className="hidden md:table-cell">Rentan Waktu</th>
+                    <th className="hidden md:table-cell">Nama Ketua</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th>1</th>
-                    <td>Cy Ganderton</td>
-                    <td>Quality Control Specialist akdbaskdakdaskdaskjdakda</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="hidden md:table-cell">1</th>
+                    <td className="text-left">Cy Ganderton</td>
+                    <td className="hidden md:table-cell">
+                      Quality Control Specialist
+                    </td>
+                    <td className="hidden md:table-cell">Blue</td>
+                    <td className="hidden md:table-cell">Blue</td>
                     <th className="flex justify-center text-center">
                       <button
                         onClick={() =>
@@ -98,13 +104,14 @@ const TablePeng = () => {
                       </button>
                     </th>
                   </tr>
-
                   <tr>
-                    <th>2</th>
-                    <td>Hart Hagerty</td>
-                    <td>Desktop Support Technician</td>
-                    <td>Purple</td>
-                    <td>Blue</td>
+                    <th className="hidden md:table-cell">2</th>
+                    <td className="text-left">Hart Hagerty</td>
+                    <td className="hidden md:table-cell">
+                      Desktop Support Technician
+                    </td>
+                    <td className="hidden md:table-cell">Purple</td>
+                    <td className="hidden md:table-cell">Blue</td>
                     <th className="flex justify-center text-center">
                       <button
                         onClick={() =>
@@ -115,87 +122,23 @@ const TablePeng = () => {
                       </button>
                     </th>
                   </tr>
-
                   <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
+                    <th className="hidden md:table-cell">3</th>
+                    <td className="text-left">Brice Swyre</td>
+                    <td className="hidden md:table-cell">Tax Accountant</td>
+                    <td className="hidden md:table-cell">Red</td>
+                    <td className="hidden md:table-cell">Blue</td>
+                    <th className="flex justify-center text-center">
+                      <button
+                        onClick={() =>
+                          document.getElementById("my_modal_11").showModal()
+                        }
+                      >
+                        <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
+                      </button>
+                    </th>
                   </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
+                  {/* Additional rows can be added here */}
                 </tbody>
               </table>
               <DetailPengModel />
