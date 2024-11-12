@@ -49,7 +49,7 @@ const SidebarMen = () => {
           imgAlt="Flowbite logo"
           className="pb-9"
         >
-          <div className="text-blckprmy text-3xl">SiPeM</div>
+          <div className="text-blckprmy text-3xl">Simda</div>
         </Sidebar.Logo>
         <Sidebar.Items>
           <Sidebar.ItemGroup>
