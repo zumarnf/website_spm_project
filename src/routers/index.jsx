@@ -19,7 +19,7 @@ const routes = [
   { path: "/mahasiswa", element: <Mahasiswa /> },
   { path: "/dosen", element: <Dosen /> },
   { path: "/prestasi", element: <Prestasi /> },
-  { path: "/penelitian/publikasi", element: <Publikasi /> },
+  { path: "/publikasi", element: <Publikasi /> },
   { path: "/mahasiswa/detailpenelitian", element: <DetailMahasiswaPen /> },
   { path: "/dosen/detaildosen", element: <DetailDos /> },
 ];

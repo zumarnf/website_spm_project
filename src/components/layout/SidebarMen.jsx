@@ -27,7 +27,7 @@ const SidebarMen = () => {
     if (
       location.pathname === "/penelitian" ||
       location.pathname === "/pengabdian" ||
-      location.pathname === "/penelitian/publikasi"
+      location.pathname === "/publikasi"
     ) {
       setIsRisetOpen(true);
     } else {
@@ -116,6 +116,24 @@ const SidebarMen = () => {
                     )}`}
                   />
                   <span className="text-base">Pengabdian</span>
+                </div>
+              </Sidebar.Item>
+              <Sidebar.Item
+                href="/publikasi"
+                className={`hover:bg-rdprmy hover:text-whtprmy group ${isActive(
+                  location.pathname,
+                  "/publikasi"
+                )}`}
+                onClick={(e) => handleClick(e, "/publikasi")}
+              >
+                <div className="flex flex-row">
+                  <HiDocument
+                    className={`h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy ${isActive(
+                      location.pathname,
+                      "/publikasi"
+                    )}`}
+                  />
+                  <span className="text-base">Publikasi</span>
                 </div>
               </Sidebar.Item>
             </Sidebar.Collapse>
