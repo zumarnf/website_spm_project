@@ -1,53 +1,70 @@
+import { useState } from "react";
+import axios from "axios";
 import BtnLogin from "./button/BtnLogin";
+import { useNavigate } from "react-router-dom";
 
 const FormLogin = () => {
+  const [email, setemail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate(); // Pastikan Anda menggunakan useNavigate
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      console.log(email, password); // Log email dan password
+      const response = await axios.post("http://127.0.0.1:8000/api/v1/login", {
+        email: email,
+        password: password,
+      });
+
+      console.log(response); // Log respons dari API
+
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        navigate("/home");
+      }
+    } catch (err) {
+      console.error(err); // Log error
+      setError(
+        "Login failed: " + (err.response?.data?.message || "Unknown error")
+      );
+    }
+  };
+
   return (
-    <>
-      <div>
-        <div>
-          <h1 className="text-3xl font-extrabold mb-7 text-blckprmy">
-            Login SiPeM
-          </h1>
-        </div>
+    <div>
+      <h1 className="text-3xl font-extrabold mb-7 text-blckprmy">
+        Login SiPeM
+      </h1>
+      <form onSubmit={handleLogin}>
         <label className="input flex items-center gap-2 mb-7 border border-blckprmy bg-whtprmy">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-4 w-4 text-blckprmy"
-          >
-            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-          </svg>
           <input
-            type="text"
+            type="email"
             className="grow text-blckprmy placeholder-gray-400 focus:outline-none focus:ring-0 border-none"
-            placeholder="Username"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+            required
           />
         </label>
         <label className="input flex items-center gap-2 mb-7 border border-blckprmy bg-whtprmy">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-4 w-4 text-blckprmy"
-          >
-            <path
-              fillRule="evenodd"
-              d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-              clipRule="evenodd"
-            />
-          </svg>
           <input
             type="password"
             className="grow text-blckprmy placeholder-gray-400 focus:outline-none focus:ring-0 border-none"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </label>
+        {error && <div className="text-red-500 mb-4">{error}</div>}
         <div className="flex justify-center">
-          <BtnLogin />
+          <BtnLogin onClick={handleLogin} />
         </div>
-      </div>
-    </>
+      </form>
+    </div>
   );
 };
 

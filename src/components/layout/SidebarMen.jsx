@@ -11,7 +11,7 @@ import {
   HiOutlinePlusSm,
   HiStar,
 } from "react-icons/hi";
-import shieldDatabase from "/src/assets/shield-database.svg";
+import telkom from "/src/assets/telkom.png";
 import { useState, useEffect } from "react";
 
 const SidebarMen = () => {
@@ -43,13 +43,11 @@ const SidebarMen = () => {
   return (
     <div className="pl-6 py-5 bg-whtprmy h-full">
       <Sidebar>
-        <Sidebar.Logo
-          href="#"
-          img={shieldDatabase}
-          imgAlt="Flowbite logo"
-          className="pb-9"
-        >
-          <div className="text-blckprmy text-3xl">Simda</div>
+        <Sidebar.Logo href="#" className="pb-9">
+          <div className="flex flex-row justify-center items-center">
+            <img src={telkom} alt="Logo" className="h-16 w-auto" />
+            <div className="text-blckprmy text-3xl">Simda</div>
+          </div>
         </Sidebar.Logo>
         <Sidebar.Items>
           <Sidebar.ItemGroup>
@@ -101,24 +99,6 @@ const SidebarMen = () => {
                 </div>
               </Sidebar.Item>
               <Sidebar.Item
-                href="/pengabdian"
-                className={`hover:bg-rdprmy hover:text-whtprmy group ${isActive(
-                  location.pathname,
-                  "/pengabdian"
-                )}`}
-                onClick={(e) => handleClick(e, "/pengabdian")}
-              >
-                <div className="flex flex-row">
-                  <HiHand
-                    className={`h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy ${isActive(
-                      location.pathname,
-                      "/pengabdian"
-                    )}`}
-                  />
-                  <span className="text-base">Pengabdian</span>
-                </div>
-              </Sidebar.Item>
-              <Sidebar.Item
                 href="/publikasi"
                 className={`hover:bg-rdprmy hover:text-whtprmy group ${isActive(
                   location.pathname,
@@ -134,6 +114,24 @@ const SidebarMen = () => {
                     )}`}
                   />
                   <span className="text-base">Publikasi</span>
+                </div>
+              </Sidebar.Item>
+              <Sidebar.Item
+                href="/pengabdian"
+                className={`hover:bg-rdprmy hover:text-whtprmy group ${isActive(
+                  location.pathname,
+                  "/pengabdian"
+                )}`}
+                onClick={(e) => handleClick(e, "/pengabdian")}
+              >
+                <div className="flex flex-row">
+                  <HiHand
+                    className={`h-6 w-6 text-blckprmy pr-2 group-hover:text-whtprmy ${isActive(
+                      location.pathname,
+                      "/pengabdian"
+                    )}`}
+                  />
+                  <span className="text-base">Pengabdian</span>
                 </div>
               </Sidebar.Item>
             </Sidebar.Collapse>

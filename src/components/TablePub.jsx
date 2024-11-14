@@ -145,15 +145,6 @@ const TablePub = () => {
               </table>
             </div>
           </div>
-          <div className="flex px-10 text-sm pt-2">
-            <a
-              className="link link-primary"
-              href="/penelitian"
-              onClick={handleLinkClick}
-            >
-              Data Penelitian
-            </a>
-          </div>
           <div className="px-6 flex justify-center">
             <PaginationPen />
           </div>

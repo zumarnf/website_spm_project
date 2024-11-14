@@ -11,45 +11,47 @@ import DetailMahaModal from "./modal/DetailMahaModal";
 const DetailContainer = () => {
   const navigate = useNavigate();
 
-  // Inisialisasi state dengan "Penelitian" sebagai default
+  // Initialize state with "Penelitian" as default
   const [judulKategori, setJudulKategori] = useState("Penelitian");
-  const [isModalOpen, setIsModalOpen] = useState(false); // State untuk modal
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal
 
   const handleLinkClick = (e) => {
-    e.preventDefault(); // Mencegah perilaku default link
-    navigate("/mahasiswa"); // Arahkan ke halaman mahasiswa secara manual
+    e.preventDefault(); // Prevent default link behavior
+    navigate("/mahasiswa"); // Navigate to mahasiswa page
   };
 
   const handleJudul = (kategori) => {
-    setJudulKategori(kategori); // Update judul berdasarkan kategori yang dipilih
+    setJudulKategori(kategori); // Update title based on selected category
   };
 
   const openModal = () => {
-    setIsModalOpen(true); // Membuka modal
+    setIsModalOpen(true); // Open modal
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Menutup modal
+    setIsModalOpen(false); // Close modal
   };
 
   return (
     <>
-      <div className="max-h-screen flex flex-col pr-5 overflow-auto">
+      <div className="md:max-h-screen h-full flex flex-col pr-5 overflow-auto">
         <ContainerProfile />
         <MenuModal />
         <div className="w-full border border-blckprmy rounded-xl p-4">
-          <div className="flex justify-between pb-3 pt-4">
+          <div className="flex flex-col md:flex-row justify-between pb-3 pt-4">
             <div className="px-7">
               <h1 className="text-2xl font-bold text-blckprmy">
                 Nama Mahasiswa
               </h1>
             </div>
-            <div className="flex flex-row gap-3 pr-3 justify-center items-center">
+            <div className="flex flex-col md:flex-row gap-3 pr-3 justify-center items-center pt-4 md:pt-0">
+              {" "}
+              {/* Added mt-4 for mobile spacing */}
               <SelectDetailMahaCat handleJudul={handleJudul} />
               <input
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-44 max-w-xs"
+                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs"
               />
               <SelectDetailMahaSearch />
               <BtnSearchMaha />
@@ -67,7 +69,7 @@ const DetailContainer = () => {
                       className="underline cursor-pointer"
                       onClick={openModal}
                     >
-                      hai
+                      Item {index + 1}
                     </span>
                   </li>
                 ))}

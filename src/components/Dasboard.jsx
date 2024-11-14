@@ -11,7 +11,7 @@ import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
 
 const CardItem = ({ title, number, Icon, link, iconColor }) => (
-  <div className="flex flex-col md:flex-row justify-between items-center w-full h-full border rounded-2xl p-3 md:p-7 shadow-md">
+  <div className="flex flex-col md:flex-row justify-between items-center w-full h-full border rounded-2xl p-3 md:p-7 shadow-md bg-whtprmy">
     <div>
       <h2 className="text-md md:text-xl font-semibold text-blckprmy">
         {title}
@@ -37,7 +37,7 @@ const Dashboard = () => {
       <ContainerProfile />
       <MenuModal />
       {/* Membungkus CardItem dalam kotak responsif */}
-      <div className="w-full border border-blckprmy rounded-xl p-4 md:p-6 lg:p-8 bg-white shadow-lg">
+      <div className="w-full border border-blckprmy rounded-xl p-4 md:p-6 lg:p-8 bg-whtprmy shadow-lg">
         <div className="px-4 md:px-7 py-4">
           <h1 className="text-lg md:text-2xl font-bold pb-5 md:pb-7 text-blckprmy">
             Dashboard
@@ -50,6 +50,13 @@ const Dashboard = () => {
             number={190}
             Icon={HiDocument}
             link="/penelitian"
+            iconColor="text-blckprmy"
+          />
+          <CardItem
+            title="Publikasi"
+            number={190}
+            Icon={HiDocument}
+            link="/publikasi"
             iconColor="text-blckprmy"
           />
           <CardItem

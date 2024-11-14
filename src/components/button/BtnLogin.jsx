@@ -1,17 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-const BtnLogin = () => {
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    navigate("/home");
-  };
-
+const BtnLogin = ({ onClick }) => {
   return (
     <>
       <button
         className="btn bg-rdprmy text-whtprmy border-none px-28"
-        onClick={handleLogin}
+        onClick={onClick} // Panggil fungsi login dari props
       >
         Login
       </button>

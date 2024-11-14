@@ -133,16 +133,8 @@ const TablePen = () => {
               </table>
             </div>
           </div>
-          <div className="flex px-10 text-sm pt-2">
-            <a
-              className="link link-primary"
-              href="/penelitian/publikasi"
-              onClick={handleLinkClick}
-            >
-              Data Publikasi
-            </a>
-          </div>
-          <div className="px-6 flex justify-center">
+
+          <div className="px-6 flex justify-center pt-5">
             <PaginationPen />
           </div>
         </div>
