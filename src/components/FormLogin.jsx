@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import BtnLogin from "./button/BtnLogin";
 import { useNavigate } from "react-router-dom";
+import logo from "/src/assets/telkom.png";
 
 const FormLogin = () => {
   const [email, setemail] = useState("");
@@ -34,16 +35,13 @@ const FormLogin = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-extrabold mb-7 text-blckprmy">
-        Login SiPeM
-      </h1>
+    <div className="flex flex-col items-center justify-center w-36">
       <form onSubmit={handleLogin}>
         <label className="input flex items-center gap-2 mb-7 border border-blckprmy bg-whtprmy">
           <input
             type="email"
             className="grow text-blckprmy placeholder-gray-400 focus:outline-none focus:ring-0 border-none"
-            placeholder="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setemail(e.target.value)}
             required

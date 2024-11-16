@@ -4,7 +4,7 @@ const BtnLogin = ({ onClick }) => {
   return (
     <>
       <button
-        className="btn bg-rdprmy text-whtprmy border-none px-28"
+        className="btn bg-rdprmy text-whtprmy border-none px-32"
         onClick={onClick} // Panggil fungsi login dari props
       >
         Login

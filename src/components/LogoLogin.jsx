@@ -1,9 +1,9 @@
-import logo from "../assets/shield-database.svg"; // Arahkan ke lokasi file SVG
+import logo from "../assets/bisnis.png"; // Arahkan ke lokasi file SVG
 
 const LogoLogin = () => {
   return (
     <div>
-      <img src={logo} alt="Login Logo" className="h-50 w-50" />
+      <img src={logo} alt="Login Logo" className="h-80 w-80" />
     </div>
   );
 };
