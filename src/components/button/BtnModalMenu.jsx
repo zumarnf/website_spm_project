@@ -5,12 +5,21 @@ const BtnModalMenu = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    // Hapus token dari localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+
+    // Redirect ke halaman login
     navigate("/");
+
+    // Tutup modal
+    document.getElementById("my_modal_3").close();
   };
 
   const handleCloseModal = () => {
     document.getElementById("my_modal_3").close();
   };
+
   return (
     <>
       <div className="flex justify-center gap-4 pt-7">

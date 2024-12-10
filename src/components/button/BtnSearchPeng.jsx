@@ -1,9 +1,12 @@
 import React from "react";
 
-const BtnSearchPeng = () => {
+const BtnSearchPeng = ({ onClick }) => {
   return (
     <>
-      <button className="btn btn-sm bg-rdprmy text-whtprmy border-none w-16 text-sm">
+      <button
+        onClick={onClick}
+        className="btn btn-sm bg-rdprmy text-whtprmy border-none w-16 text-sm"
+      >
         Cari
       </button>
     </>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const InputPengMaha = ({ pengabdianData, onClose }) => {
+const DetailPenUpdate = ({ penelitianData, onClose }) => {
+  const [isEditable, setIsEditable] = useState(false);
   const [participants, setParticipants] = useState([
     { name: "", id: "", id_prodi: "", flag: 1, category: "mahasiswa" }, // Ketua
   ]);
@@ -11,11 +13,12 @@ const InputPengMaha = ({ pengabdianData, onClose }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeIndex, setActiveIndex] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/"); // Arahkan jika tidak ada token
+      navigate("/"); // Redirect jika tidak ada token
       return;
     }
 
@@ -49,6 +52,10 @@ const InputPengMaha = ({ pengabdianData, onClose }) => {
       .then((response) => setMahasiswa(response.data.data))
       .catch((error) => console.error("Error fetching mahasiswa:", error));
   }, []);
+
+  const toggleEdit = () => {
+    setIsEditable(!isEditable);
+  };
 
   const handleAddParticipant = () => {
     if (participants.length < 5) {
@@ -145,9 +152,10 @@ const InputPengMaha = ({ pengabdianData, onClose }) => {
     if (!token) return;
 
     try {
+      console.log(participants);
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/pengabdian",
-        pengabdianData,
+        "http://127.0.0.1:8000/api/v1/penelitian",
+        penelitianData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -161,13 +169,13 @@ const InputPengMaha = ({ pengabdianData, onClose }) => {
           nim_mahasiswa:
             participant.category === "mahasiswa" ? participant.id : null,
           nip_dosen: participant.category === "dosen" ? participant.id : null,
-          id_pengabdian: response.data.data.id,
+          id_penelitian: response.data.data.id,
           flag: participant.flag,
         };
         const endpoint =
           participant.category === "mahasiswa"
-            ? "http://127.0.0.1:8000/api/v1/pengabdianMahasiswa"
-            : "http://127.0.0.1:8000/api/v1/pengabdianDosen";
+            ? "http://127.0.0.1:8000/api/v1/penelitianMahasiswa"
+            : "http://127.0.0.1:8000/api/v1/penelitianDosen";
 
         await axios.post(endpoint, payload, {
           headers: { Authorization: `Bearer ${token}` },
@@ -177,7 +185,6 @@ const InputPengMaha = ({ pengabdianData, onClose }) => {
       onClose();
     } catch (error) {
       console.error("Error saving data:", error.response);
-      console.error("Error saving data:", error.response.data);
       alert("Gagal menyimpan data.");
     }
   };
@@ -185,95 +192,111 @@ const InputPengMaha = ({ pengabdianData, onClose }) => {
   return (
     <dialog className="modal modal-bottom sm:modal-middle" open>
       <div className="modal-box bg-whtprmy text-blckprmy overflow-y-auto">
-        <h3 className="font-bold text-lg pb-7">Input Partisipasi</h3>
+        <h3 className="font-bold text-lg pb-7">Detail Partisipasi</h3>
         <form className="grid grid-cols-1 gap-y-4 gap-x-3 text-sm">
           {participants.map((participant, index) => (
             <div key={index}>
-              <label className="font-semibold">Kategori</label>
-              <select
-                value={participant.category}
-                onChange={(e) =>
-                  handleChange(index, "category", e.target.value)
-                }
-                className="select select-bordered w-full bg-whtprmy input-sm"
-              >
-                <option value="mahasiswa">Mahasiswa</option>
-                <option value="dosen">Dosen</option>
-              </select>
+              {participants.map((participant, index) => (
+                <div key={index}>
+                  <label className="font-semibold">Kategori</label>
+                  <select
+                    value={participant.category}
+                    onChange={(e) =>
+                      handleChange(index, "category", e.target.value)
+                    }
+                    className="select select-bordered w-full bg-whtprmy input-sm"
+                  >
+                    <option value="mahasiswa">Mahasiswa</option>
+                    <option value="dosen">Dosen</option>
+                  </select>
 
-              <label className="font-semibold">Prodi</label>
-              <select
-                value={participant.id_prodi}
-                onChange={(e) =>
-                  handleChange(index, "id_prodi", e.target.value)
-                }
-                className="select select-bordered w-full bg-whtprmy input-sm"
-              >
-                <option value="">-- Pilih Prodi --</option>
-                {prodi.map((prodiItem) => (
-                  <option key={prodiItem.id} value={prodiItem.id}>
-                    {prodiItem.name}
-                  </option>
-                ))}
-              </select>
-
-              <label className="font-semibold">Nama</label>
-              <input
-                type="text"
-                value={participant.name}
-                onChange={(e) => handleSearchName(index, e.target.value)}
-                onFocus={() => setActiveIndex(index)}
-                className="input input-bordered w-full bg-whtprmy input-sm"
-                placeholder="Cari nama"
-              />
-
-              {searchTerm &&
-                searchResults.length > 0 &&
-                activeIndex === index && (
-                  <ul className="mt-2 max-h-40 overflow-y-auto bg-white border border-gray-300 rounded-md">
-                    {searchResults.map((result) => (
-                      <li
-                        key={result.id}
-                        className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                        onClick={() => handleSelectName(index, result)}
-                      >
-                        {result.name}
-                      </li>
+                  <label className="font-semibold">Prodi</label>
+                  <select
+                    value={participant.id_prodi}
+                    onChange={(e) =>
+                      handleChange(index, "id_prodi", e.target.value)
+                    }
+                    className="select select-bordered w-full bg-whtprmy input-sm"
+                  >
+                    <option value="">-- Pilih Prodi --</option>
+                    {prodi.map((prodiItem) => (
+                      <option key={prodiItem.id} value={prodiItem.id}>
+                        {prodiItem.name}
+                      </option>
                     ))}
-                  </ul>
-                )}
-              <button
-                type="button"
-                onClick={() => handleDeleteParticipant(index)}
-                className="btn btn-sm btn-danger mt-3"
-              >
-                Hapus
-              </button>
+                  </select>
+
+                  <label className="font-semibold">Nama</label>
+                  <input
+                    type="text"
+                    value={participant.name}
+                    onChange={(e) => handleSearchName(index, e.target.value)}
+                    onFocus={() => setActiveIndex(index)}
+                    className="input input-bordered w-full bg-whtprmy input-sm"
+                    placeholder="Cari nama"
+                  />
+
+                  {searchTerm &&
+                    searchResults.length > 0 &&
+                    activeIndex === index && (
+                      <ul className="mt-2 max-h-40 overflow-y-auto bg-white border border-gray-300 rounded-md">
+                        {searchResults.map((entity) => (
+                          <li
+                            key={entity.id}
+                            className="cursor-pointer p-2 hover:bg-gray-200"
+                            onClick={() => handleSelectName(index, entity)}
+                          >
+                            {entity.name} -{" "}
+                            {participant.category === "mahasiswa"
+                              ? entity.nim
+                              : entity.nip}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                </div>
+              ))}
+
+              {index > 0 && (
+                <button
+                  type="button"
+                  onClick={() => handleDeleteParticipant(index)}
+                  className="btn btn-error btn-xs mt-2"
+                >
+                  Hapus Anggota
+                </button>
+              )}
+
+              {isEditable && (
+                <button
+                  type="button"
+                  onClick={toggleEdit}
+                  className="btn btn-primary btn-xs mt-2 ml-2"
+                >
+                  Edit
+                </button>
+              )}
             </div>
           ))}
         </form>
-
-        <div className="modal-action mt-7">
+        <div className="modal-action mt-4 justify-center gap-3">
           <button
-            type="button"
-            className="btn bg-mainbtnprmy text-white"
+            className="btn bg-rdprmy text-whtprmy border-none btn-sm"
             onClick={handleAddParticipant}
           >
-            Tambah Partisipan
+            Add Anggota
           </button>
           <button
-            type="button"
-            className="btn bg-mainbtnsec text-white"
-            onClick={onClose}
-          >
-            Batal
-          </button>
-          <button
-            type="button"
-            className="btn bg-success text-white"
+            className="btn bg-rdprmy text-whtprmy border-none btn-sm"
             onClick={handleSave}
           >
             Simpan
+          </button>
+          <button
+            className="btn bg-blckprmy text-whtprmy border-none btn-sm"
+            onClick={onClose}
+          >
+            Cancel
           </button>
         </div>
       </div>
@@ -281,4 +304,4 @@ const InputPengMaha = ({ pengabdianData, onClose }) => {
   );
 };
 
-export default InputPengMaha;
+export default DetailPenUpdate;

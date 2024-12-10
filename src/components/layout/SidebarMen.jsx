@@ -46,7 +46,7 @@ const SidebarMen = () => {
         <Sidebar.Logo href="#" className="pb-9">
           <div className="flex flex-row justify-center items-center">
             <img src={telkom} alt="Logo" className="h-16 w-auto" />
-            <div className="text-blckprmy text-3xl">Simda</div>
+            <div className="text-blckprmy text-3xl">SIMDA</div>
           </div>
         </Sidebar.Logo>
         <Sidebar.Items>

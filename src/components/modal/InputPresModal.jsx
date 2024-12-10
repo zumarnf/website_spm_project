@@ -1,100 +1,109 @@
 import React, { useState } from "react";
+import axios from "axios";
 import InputPresMaha from "./InputPresMaha";
 
 const InputPresModal = ({ onClose }) => {
-  const [isModalPengVisible, setModalPengVisible] = useState(true);
+  const [isModalPresVisible, setModalPresVisible] = useState(true);
   const [isModalMahaVisible, setModalMahaVisible] = useState(false);
+  const [prestasiData, setPrestasiData] = useState({
+    nama_lomba: "",
+    juara: "",
+    url_foto: "",
+    url_sertifikat: "",
+  });
 
-  // Fungsi untuk switch dari InputPenModal ke InputPenMaha
   const handleSubmit = () => {
-    setModalPengVisible(false); // Menyembunyikan modal pertama
-    setModalMahaVisible(true); // Menampilkan modal kedua
+    console.log(prestasiData);
+    if (
+      prestasiData.nama_lomba != "" &&
+      prestasiData.juara != "" &&
+      prestasiData.url_foto != "" &&
+      prestasiData.url_sertifikat != ""
+    ) {
+      setModalPresVisible(false);
+      setModalMahaVisible(true);
+    } else {
+      alert("Lengkapi data prestasi");
+    }
   };
 
-  // Fungsi untuk kembali dari InputPenMaha ke InputPenModal
-  const handleBackToModalPeng = () => {
-    setModalMahaVisible(false); // Menyembunyikan modal kedua
-    setModalPengVisible(true); // Menampilkan modal pertama
+  const closeAllModals = () => {
+    setModalPresVisible(false);
+    setModalMahaVisible(false);
+    onClose();
   };
 
-  // Fungsi untuk menutup modal InputPenModal
   const handleCloseModal = () => {
-    setModalPengVisible(false); // Menyembunyikan modal
-    onClose(); // Memanggil fungsi onClose yang diteruskan dari komponen luar
+    setModalPresVisible(false);
+    onClose();
   };
 
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
-      {isModalPengVisible && (
+      {isModalPresVisible && (
         <dialog
           id="my_modal_6"
           className="modal modal-bottom sm:modal-middle w-full overflow-hidden"
           open
         >
           <div className="modal-box bg-whtprmy text-blckprmy">
-            <h3 className="font-bold text-lg mb-4">Input Penelitian</h3>
+            <h3 className="font-bold text-lg mb-4">Input Prestasi</h3>
             <form className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
-              <label className="font-semibold">Judul Penelitian</label>
+              <label className="font-semibold">Judul Prestasi</label>
               <input
                 type="text"
-                placeholder="Masukkan judul penelitian"
+                placeholder="Masukkan judul prestasi"
                 className="input input-bordered w-full bg-whtprmy input-sm"
+                value={prestasiData.nama_lomba}
+                onChange={(e) =>
+                  setPrestasiData({
+                    ...prestasiData,
+                    nama_lomba: e.target.value,
+                  })
+                }
+                required
               />
 
-              <label className="font-semibold">Tanggal</label>
-              <input
-                type="date"
-                className="input input-bordered w-full bg-whtprmy input-sm"
-              />
-
-              <label className="font-semibold">Nomor SK</label>
-              <input
-                type="text"
-                placeholder="Masukkan nomor SK"
-                className="input input-bordered w-full bg-whtprmy input-sm"
-              />
-
-              <label className="font-semibold">Nomor Kontrak</label>
-              <input
-                type="text"
-                placeholder="Masukkan nomor kontrak"
-                className="input input-bordered w-full bg-whtprmy input-sm"
-              />
-
-              <label className="font-semibold">Skema</label>
-              <input
-                type="text"
-                placeholder="Masukkan skema"
-                className="input input-bordered w-full bg-whtprmy input-sm"
-              />
-
-              <label className="font-semibold">Bidang</label>
-              <input
-                type="text"
-                placeholder="Masukkan bidang"
-                className="input input-bordered w-full bg-whtprmy input-sm"
-              />
-
-              <label className="font-semibold">Dana</label>
+              <label className="font-semibold">Juara</label>
               <input
                 type="number"
-                placeholder="Masukkan dana"
+                placeholder="Masukkan Juara Berapa"
                 className="input input-bordered w-full bg-whtprmy input-sm"
+                value={prestasiData.juara}
+                onChange={(e) =>
+                  setPrestasiData({ ...prestasiData, juara: e.target.value })
+                }
+                required
               />
 
-              <label className="font-semibold">Sumber Dana</label>
+              <label className="font-semibold">Link Bukti Foto</label>
               <input
                 type="text"
-                placeholder="Masukkan sumber dana"
+                placeholder="Foto"
                 className="input input-bordered w-full bg-whtprmy input-sm"
+                value={prestasiData.url_foto}
+                onChange={(e) =>
+                  setPrestasiData({
+                    ...prestasiData,
+                    url_foto: e.target.value,
+                  })
+                }
+                required
               />
-
-              <label className="font-semibold">File</label>
+              <label className="font-semibold">Link Bukti Sertifikat</label>
               <input
                 type="text"
-                placeholder="Masukkan nama file"
+                placeholder="Sertifikat"
                 className="input input-bordered w-full bg-whtprmy input-sm"
+                value={prestasiData.url_sertifikat}
+                onChange={(e) =>
+                  setPrestasiData({
+                    ...prestasiData,
+                    url_sertifikat: e.target.value,
+                  })
+                }
+                required
               />
             </form>
             <div className="modal-action mt-4 justify-center gap-3">
@@ -102,7 +111,7 @@ const InputPresModal = ({ onClose }) => {
                 className="btn bg-rdprmy text-whtprmy border-none btn-sm px-4"
                 onClick={handleSubmit}
               >
-                Submit
+                Next
               </button>
               <button
                 className="btn btn-sm bg-rdprmy text-whtprmy border-none px-5"
@@ -114,7 +123,9 @@ const InputPresModal = ({ onClose }) => {
           </div>
         </dialog>
       )}
-      {isModalMahaVisible && <InputPresMaha onClose={handleBackToModalPeng} />}
+      {isModalMahaVisible && (
+        <InputPresMaha prestasiData={prestasiData} onClose={closeAllModals} />
+      )}
     </>
   );
 };

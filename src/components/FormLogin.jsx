@@ -2,34 +2,45 @@ import { useState } from "react";
 import axios from "axios";
 import BtnLogin from "./button/BtnLogin";
 import { useNavigate } from "react-router-dom";
-import logo from "/src/assets/telkom.png";
 
 const FormLogin = () => {
-  const [email, setemail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // Pastikan Anda menggunakan useNavigate
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      console.log(email, password); // Log email dan password
+      // Kirim permintaan login
       const response = await axios.post("http://127.0.0.1:8000/api/v1/login", {
-        email: email,
-        password: password,
+        email,
+        password,
       });
 
-      console.log(response); // Log respons dari API
+      // Validasi respons
+      if (response.status === 200 && response.data.data) {
+        const { token, role } = response.data.data;
 
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
+        // Simpan token dan role di localStorage
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", role);
+
+        // Log untuk verifikasi
+        console.log("Token tersimpan:", localStorage.getItem("token"));
+        console.log("Role tersimpan:", localStorage.getItem("role"));
+
+        // Arahkan pengguna ke halaman home
         navigate("/home");
+      } else {
+        setError("Login gagal, coba lagi.");
       }
     } catch (err) {
-      console.error(err); // Log error
+      // Tangani kesalahan
+      console.error("Error:", err);
       setError(
-        "Login failed: " + (err.response?.data?.message || "Unknown error")
+        err.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
       );
     }
   };
@@ -43,7 +54,7 @@ const FormLogin = () => {
             className="grow text-blckprmy placeholder-gray-400 focus:outline-none focus:ring-0 border-none"
             placeholder="Email"
             value={email}
-            onChange={(e) => setemail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
@@ -59,7 +70,7 @@ const FormLogin = () => {
         </label>
         {error && <div className="text-red-500 mb-4">{error}</div>}
         <div className="flex justify-center">
-          <BtnLogin onClick={handleLogin} />
+          <BtnLogin />
         </div>
       </form>
     </div>
