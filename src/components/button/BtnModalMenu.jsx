@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const BtnModalMenu = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const BtnModalMenu = () => {
 
     // Tutup modal
     document.getElementById("my_modal_3").close();
+    toast.success("Berhasil keluar.");
   };
 
   const handleCloseModal = () => {

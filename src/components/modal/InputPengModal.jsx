@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputPengMaha from "./InputPengMaha";
+import { toast } from "react-toastify";
 
 const InputPengModal = ({ onClose }) => {
   const [isModalPengVisible, setModalPengVisible] = useState(true);
@@ -32,7 +33,7 @@ const InputPengModal = ({ onClose }) => {
       setModalPengVisible(false);
       setModalMahaVisible(true);
     } else {
-      alert("Lengkapi data pengabdian");
+      toast.error("Lengkapi data pengabdian");
     }
   };
 

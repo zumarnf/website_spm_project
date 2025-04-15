@@ -8,8 +8,13 @@ import BtnInputPeng from "./button/BtnInputPeng";
 import PaginationPen from "./PaginationPen";
 import InputPengModal from "./modal/InputPengModal";
 import InputPengMaha from "./modal/InputPengMaha";
+import DetailPengModal from "./modal/DetailPengModel";
+import DetailPengUpdate from "./modal/DetailPengUpdate";
 import axios from "axios";
 import { HiDotsCircleHorizontal } from "react-icons/hi";
+import { HiPencil } from "react-icons/hi";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const TablePeng = () => {
   const [isInputPengModalVisible, setInputPengModalVisible] = useState(false);
@@ -22,6 +27,11 @@ const TablePeng = () => {
   const [loading, setLoading] = useState(true);
   const [pengabdianInputData, setPengabdianInputData] = useState(null);
   const navigate = useNavigate();
+  const [selectedPengabdian, setSelectedPengabdian] = useState(null);
+  const [isDetailMahaOpen, setIsDetailMahaOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Halaman saat ini
+  const [totalPages, setTotalPages] = useState(1); // Total halaman
+  const [totalData, setTotalData] = useState(0); // Total data
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,12 +43,9 @@ const TablePeng = () => {
 
       try {
         setLoading(true);
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/v1/pengabdian",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await axios.get(`${API_URL}/pengabdian`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setPengabdianData(response.data.data);
         setFilteredData(response.data.data); // Awal data yang ditampilkan sama dengan semua data
       } catch (err) {
@@ -55,24 +62,114 @@ const TablePeng = () => {
     fetchData();
   }, [navigate]);
 
-  const handleSearch = () => {
-    const filtered = pengabdianData.filter((pengabdian) => {
-      if (searchCategory === "Judul") {
-        return pengabdian.judul
-          .toLowerCase()
-          .includes(searchValue.toLowerCase());
-      } else if (searchCategory === "Nama") {
-        const ketuaName =
-          pengabdian.dosen.find((d) => d.flag === 1)?.dosen?.name ||
-          pengabdian.mahasiswa.find((m) => m.flag === 1)?.mahasiswa?.name ||
-          "N/A";
-        return ketuaName.toLowerCase().includes(searchValue.toLowerCase());
-      } else if (searchCategory === "Tahun") {
-        return pengabdian.tahun.toString().includes(searchValue);
+  const fetchData = async (page = 1, searchParams = "") => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `${API_URL}/pengabdian?per_page=20&page=${page}&${searchParams}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setPengabdianData(response.data.data);
+      setFilteredData(response.data.data);
+      setCurrentPage(response.data.meta.current_page); // Menyimpan halaman saat ini
+      setTotalPages(response.data.meta.last_page); // Menyimpan total halaman
+      setTotalData(response.data.meta.total); // Menyimpan total data
+    } catch (err) {
+      if (err.response?.status === 401) {
+        navigate("/");
+      } else {
+        setError("Terjadi kesalahan saat memuat data.");
       }
-      return true;
-    });
-    setFilteredData(filtered);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [navigate]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+
+      // Tentukan s_table berdasarkan kategori pencarian
+      let s_table;
+      switch (searchCategory) {
+        case "Judul":
+          s_table = "";
+          break;
+        case "Nama":
+          s_table = "ketua_name";
+          break;
+        case "Tahun":
+          s_table = "";
+          break;
+        case "Ketua_prodi":
+          s_table = "ketua_prodi";
+          break;
+        default:
+          s_table = "";
+      }
+
+      // Bangun parameter pencarian
+      let searchParams = `s_table=${s_table}&s=${searchValue}&s_like=true`;
+
+      // Panggil API dengan halaman baru dan parameter pencarian
+      fetchData(newPage, searchParams);
+    }
+  };
+
+  // Fungsi pencarian
+  const handleSearch = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+      return;
+    }
+    setCurrentPage(1); // Reset halaman saat pencarian
+
+    try {
+      setLoading(true);
+      let s_table;
+      switch (searchCategory) {
+        case "Judul":
+          s_table = "";
+          break;
+        case "Nama":
+          s_table = "ketua_name";
+          break;
+        case "Ketua_prodi":
+          s_table = "ketua_prodi";
+          break;
+        case "Tahun":
+          s_table = "";
+          break;
+        default:
+          s_table = "";
+      }
+
+      let searchParams = `s_table=${s_table}&s=${searchValue}&s_like=true`;
+
+      // Kirim request ke server dengan parameter pencarian
+      fetchData(1, searchParams); // Reset halaman pertama saat pencarian
+    } catch (err) {
+      if (err.response?.status === 401) {
+        navigate("/");
+      } else {
+        setError("Terjadi kesalahan saat mencari data.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCategoryChange = (category) => {
@@ -96,9 +193,7 @@ const TablePeng = () => {
 
   const getKetuaName = (pengabdian) => {
     const ketuaDosen = pengabdian.dosen.find((d) => d.flag === 1)?.dosen?.name;
-    const ketuaMahasiswa = pengabdian.mahasiswa.find((m) => m.flag === 1)
-      ?.mahasiswa?.name;
-    return ketuaDosen || ketuaMahasiswa || "N/A";
+    return ketuaDosen || "N/A";
   };
 
   return (
@@ -119,15 +214,35 @@ const TablePeng = () => {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="Cari Tahun"
-                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs"
+                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs text-xs"
               />
+            ) : searchCategory === "Ketua_prodi" ? (
+              <select
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                className="select select-bordered border-blckprmy bg-whtprmy select-sm w-full max-w-xs text-xs"
+              >
+                <option value="">pilih</option>
+                <option value="1">Teknologi Informasi</option>
+                <option value="2">Sistem Informasi</option>
+                <option value="3">Informatika</option>
+                <option value="4">Rekayasa Perangkat Lunak</option>
+                <option value="5">Digital Bisnis</option>
+                <option value="6">Sains Data</option>
+                <option value="7">Teknik Komputer</option>
+                <option value="8">Teknik Logistik</option>
+                <option value="9">Teknik Telekomunikasi</option>
+                <option value="10">Teknik Industri</option>
+                <option value="11">Teknik Elektro</option>
+                <option value="12">Eksternal</option>
+              </select>
             ) : (
               <input
                 type="text"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 placeholder={`Cari berdasarkan ${searchCategory}`}
-                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs"
+                className="input input-bordered border-blckprmy bg-whtprmy input-sm w-full max-w-xs text-xs"
               />
             )}
             <SelectPeng onChange={handleCategoryChange} />
@@ -145,7 +260,7 @@ const TablePeng = () => {
                 <tr className="bg-whtprmy">
                   <th className="hidden md:table-cell"></th>
                   <th className="text-left">Judul Pengabdian</th>
-                  <th className="hidden md:table-cell">Tanggal</th>
+                  <th className="hidden md:table-cell">Tahun</th>
                   <th className="hidden md:table-cell">Nama Ketua</th>
                   <th className="hidden md:table-cell">Bidang</th>
                   <th className="hidden md:table-cell">Skema</th>
@@ -182,10 +297,27 @@ const TablePeng = () => {
                       <td className="hidden md:table-cell">
                         {pengabdian.skema || "N/A"}
                       </td>
-                      <td className="flex justify-center">
-                        <button>
+                      <td className="text-center">
+                        <button
+                          onClick={() => {
+                            setSelectedPengabdian(pengabdian); // Simpan data pengabdian yang dipilih
+                            document.getElementById("my_modal_11").showModal(); // Buka modal
+                          }}
+                        >
                           <HiDotsCircleHorizontal className="text-rdprmy bg-whtprmy" />
                         </button>
+                        <DetailPengModal data={selectedPengabdian} />
+                      </td>
+                      <td className="text-center">
+                        <button
+                          onClick={() => {
+                            setSelectedPengabdian(pengabdian); // Simpan data penelitian yang dipilih
+                            document.getElementById("modal_25").showModal(); // Buka modal
+                          }}
+                        >
+                          <HiPencil className="text-rdprmy bg-whtprmy" />
+                        </button>
+                        <DetailPengUpdate data={selectedPengabdian} />
                       </td>
                     </tr>
                   ))
@@ -202,7 +334,11 @@ const TablePeng = () => {
         </div>
 
         <div className="px-6 flex justify-center pt-5">
-          <PaginationPen />
+          <PaginationPen
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </div>
 

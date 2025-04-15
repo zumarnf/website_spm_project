@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DetailContainerPen from "../components/DetailContainerPen";
+import DetailMahasiswa from "../components/DetailMahasiswa";
 import SidebarMen from "../components/layout/SidebarMen";
 import { HiArrowRight, HiX } from "react-icons/hi";
 
@@ -38,7 +38,7 @@ const DetailMahasiswaPen = () => {
           className="flex-1 pr-8 pt-2 pb-5 h-full"
           onClick={() => sidebarOpen && setSidebarOpen(false)}
         >
-          <DetailContainerPen />
+          <DetailMahasiswa />
         </div>
       </div>
     </>

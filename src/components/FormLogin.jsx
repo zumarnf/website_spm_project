@@ -2,6 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import BtnLogin from "./button/BtnLogin";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const FormLogin = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +17,7 @@ const FormLogin = () => {
 
     try {
       // Kirim permintaan login
-      const response = await axios.post("http://127.0.0.1:8000/api/v1/login", {
+      const response = await axios.post(`${API_URL}/login`, {
         email,
         password,
       });
@@ -33,15 +36,15 @@ const FormLogin = () => {
 
         // Arahkan pengguna ke halaman home
         navigate("/home");
+        toast.success("Login berhasil.");
       } else {
         setError("Login gagal, coba lagi.");
+        toast.error("Login gagal, coba lagi.");
       }
     } catch (err) {
       // Tangani kesalahan
-      console.error("Error:", err);
-      setError(
-        err.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+
+      toast.error("Email atau password salah.");
     }
   };
 

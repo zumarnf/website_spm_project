@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const InputDosModal = ({ onAddDosen }) => {
   const [prodiOptions, setProdiOptions] = useState([]); // Menyimpan daftar prodi
+  const [jabatanOptions, setJabatanOptions] = useState([]); // Menyimpan daftar jabatan
   const [formData, setFormData] = useState({
     nip: "",
     nidn: "",
@@ -12,6 +16,10 @@ const InputDosModal = ({ onAddDosen }) => {
     gelar_depan: "",
     gelar_belakang: "",
     id_prodi: "",
+    status: "",
+  });
+  const [jabatans, setJabatans] = useState({
+    id_jabatan: "",
   });
 
   // Fetch data Prodi saat komponen dimuat
@@ -23,7 +31,7 @@ const InputDosModal = ({ onAddDosen }) => {
           alert("Token tidak ditemukan! Silakan login ulang.");
           return;
         }
-        const response = await axios.get("http://127.0.0.1:8000/api/v1/prodi", {
+        const response = await axios.get(`${API_URL}/prodi`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -36,6 +44,30 @@ const InputDosModal = ({ onAddDosen }) => {
     };
 
     fetchProdi();
+  }, []);
+
+  // Fetch data Jabatan saat komponen dimuat
+  useEffect(() => {
+    const fetchJabatan = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          alert("Token tidak ditemukan! Silakan login ulang.");
+          return;
+        }
+        const response = await axios.get(`${API_URL}/jabatan`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setJabatanOptions(response.data.data); // Menyimpan data jabatan ke state
+      } catch (error) {
+        console.error("Error fetching jabatan:", error);
+        alert("Gagal mengambil data jabatan.");
+      }
+    };
+
+    fetchJabatan();
   }, []);
 
   // Menutup modal
@@ -54,28 +86,44 @@ const InputDosModal = ({ onAddDosen }) => {
         return;
       }
 
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/dosen",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      onAddDosen(response.data.data); // Memperbarui daftar dosen di TableDos
+      // Kirim data dosen
+      const dosenResponse = await axios.post(`${API_URL}/dosen`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Kirim data historyJabatan
+      const payload = {
+        nip_dosen: formData.nip,
+        id_jabatan: jabatans.id_jabatan,
+      };
+      await axios.post(`${API_URL}/historyJabatan`, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      toast.success("Data dosen berhasil ditambahkan.");
+      onAddDosen(dosenResponse.data.data); // Memperbarui daftar dosen di parent component
       closeModal();
     } catch (error) {
-      console.error("Error adding dosen:", error);
-      alert("Gagal menambahkan dosen.");
+      toast.error("Gagal menambahkan data dosen.");
     }
   };
 
-  // Menangani perubahan input
+  // Menangani perubahan input form dosen
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
+      [name]: value,
+    });
+  };
+
+  // Menangani perubahan input jabatan
+  const handleJabatanChange = (e) => {
+    const { name, value } = e.target;
+    setJabatans({
+      ...jabatans,
       [name]: value,
     });
   };
@@ -182,6 +230,38 @@ const InputDosModal = ({ onAddDosen }) => {
                 {prodi.name}
               </option>
             ))}
+          </select>
+
+          <label className="font-semibold">Jabatan</label>
+          <select
+            name="id_jabatan"
+            value={jabatans.id_jabatan}
+            onChange={handleJabatanChange}
+            className="select select-bordered w-full bg-whtprmy text-blckprmy select-sm"
+            required
+          >
+            <option value="" disabled>
+              Pilih Jabatan
+            </option>
+            {jabatanOptions.map((jabat) => (
+              <option key={jabat.id} value={jabat.id}>
+                {jabat.jabatan}
+              </option>
+            ))}
+          </select>
+          <label className="font-semibold">Status</label>
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleInputChange}
+            className="select select-bordered w-full bg-whtprmy text-blckprmy select-sm"
+            required
+          >
+            <option value="" disabled>
+              Pilih Status
+            </option>
+            <option value="Aktif">Aktif</option>
+            <option value="Tidak Aktif">Tidak Aktif</option>
           </select>
         </form>
 

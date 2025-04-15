@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const DetailPengModal = ({ data }) => {
+const DetailPresModal = ({ data }) => {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const DetailPengModal = ({ data }) => {
   }, []);
 
   const closeModal = () => {
-    const modal = document.getElementById("my_modal_11");
+    const modal = document.getElementById("my_modal_16");
     modal.close();
   };
 
@@ -28,7 +28,7 @@ const DetailPengModal = ({ data }) => {
       }
 
       if (!data?.id) {
-        alert("Data pengabdian tidak ditemukan.");
+        alert("Data prestasi tidak ditemukan.");
         return;
       }
 
@@ -41,43 +41,32 @@ const DetailPengModal = ({ data }) => {
         },
       };
 
-      // 1. Hapus relasi `pengabdianMahasiswa` jika ada
+      // Hapus relasi `prestasiMahasiswa` jika ada
       if (data?.mahasiswa?.length > 0) {
         for (const mahasiswa of data.mahasiswa) {
-          console.log(
-            `Menghapus relasi pengabdianMahasiswa ID: ${mahasiswa.id}`
-          );
+          console.log(`Menghapus relasi prestasiMahasiswa ID: ${mahasiswa.id}`);
           await axios.delete(
-            `${API_URL}/pengabdianMahasiswa/${mahasiswa.id}`,
+            `${API_URL}/prestasiMahasiswa/${mahasiswa.id}`,
             config
           );
         }
-        console.log("Semua relasi pengabdianMahasiswa berhasil dihapus.");
+        console.log("Semua relasi prestasiMahasiswa berhasil dihapus.");
       }
 
-      // 2. Hapus relasi `pengabdianDosen` jika ada
-      if (data?.dosen?.length > 0) {
-        for (const dosen of data.dosen) {
-          console.log(`Menghapus relasi pengabdianDosen ID: ${dosen.id}`);
-          await axios.delete(`${API_URL}/pengabdianDosen/${dosen.id}`, config);
-        }
-        console.log("Semua relasi pengabdianDosen berhasil dihapus.");
-      }
-
-      // 3. Hapus data induk `pengabdian`
-      console.log(`Menghapus data pengabdian dengan ID: ${data.id}`);
+      // Hapus data induk `prestasi`
+      console.log(`Menghapus data prestasi dengan ID: ${data.id}`);
       const response = await axios.delete(
-        `${API_URL}/pengabdian/${data.id}`,
+        `${API_URL}/prestasi/${data.id}`,
         config
       );
 
       if (response.status === 200) {
-        toast.success("Data pengabdian berhasil dihapus.");
+        toast.success("Data berhasil dihapus.");
         closeModal(); // Tutup modal jika berhasil
         // Tambahkan logika untuk refresh data jika diperlukan
       } else {
         console.error("Respon server:", response);
-        toast.error(`Gagal menghapus data`);
+        toast.error("Gagal menghapus data.");
       }
     } catch (error) {
       console.error("Terjadi kesalahan:", error);
@@ -95,42 +84,27 @@ const DetailPengModal = ({ data }) => {
     }
   };
 
-  const participants = [
-    ...(data?.dosen || []).map((d) => ({
-      id: d.dosen.nip,
-      name: `${d.dosen.gelar_depan} ${d.dosen.name}, ${d.dosen.gelar_belakang}`,
-      category: "dosen",
-    })),
-    ...(data?.mahasiswa || []).map((m) => ({
-      id: m.mahasiswa.nim,
-      name: m.mahasiswa.name,
-      category: "mahasiswa",
-    })),
-  ];
+  const participants = (data?.mahasiswa || []).map((m) => ({
+    id: m.mahasiswa.nim,
+    name: m.mahasiswa.name,
+    category: "mahasiswa",
+  }));
 
   return (
     <>
-      <dialog id="my_modal_11" className="modal modal-bottom sm:modal-middle">
+      <dialog id="my_modal_16" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box bg-whtprmy text-blckprmy overflow-y-auto sm:w-full sm:max-w-3xl">
           <h3 className="font-bold text-lg mb-4 sticky top-0 left-0 z-10 bg-whtprmy shadow-md p-2 text-center">
-            Detail Pengabdian
+            Detail Prestasi
           </h3>
           <div className="grid grid-cols-2 gap-4">
-            {/* Kolom Detail Pengabdian */}
+            {/* Kolom Detail Prestasi */}
             <div>
               <form className="grid grid-cols-1 gap-y-3 text-sm">
-                <label className="font-semibold">Judul Pengabdian</label>
+                <label className="font-semibold">Judul Prestasi</label>
                 <input
                   type="text"
-                  defaultValue={data?.judul || ""}
-                  readOnly
-                  className="input input-bordered w-full bg-whtprmy input-sm"
-                />
-
-                <label className="font-semibold">Tahun</label>
-                <input
-                  type="number"
-                  defaultValue={data?.tahun || ""}
+                  defaultValue={data?.nama_lomba || ""}
                   readOnly
                   className="input input-bordered w-full bg-whtprmy input-sm"
                 />
@@ -138,54 +112,22 @@ const DetailPengModal = ({ data }) => {
                 <label className="font-semibold">Nomor SK</label>
                 <input
                   type="text"
-                  defaultValue={data?.no_sk || ""}
+                  defaultValue={data?.juara || ""}
                   readOnly
                   className="input input-bordered w-full bg-whtprmy input-sm"
                 />
 
-                <label className="font-semibold">Nomor Kontrak</label>
+                <label className="font-semibold">Bukti Foto</label>
                 <input
                   type="text"
-                  defaultValue={data?.no_kontrak || ""}
+                  defaultValue={data?.url_foto || ""}
                   readOnly
                   className="input input-bordered w-full bg-whtprmy input-sm"
                 />
-
-                <label className="font-semibold">Skema</label>
+                <label className="font-semibold">Bukti Sertifikat</label>
                 <input
                   type="text"
-                  defaultValue={data?.skema || ""}
-                  readOnly
-                  className="input input-bordered w-full bg-whtprmy input-sm"
-                />
-
-                <label className="font-semibold">Bidang</label>
-                <input
-                  type="text"
-                  defaultValue={data?.bidang || ""}
-                  readOnly
-                  className="input input-bordered w-full bg-whtprmy input-sm"
-                />
-
-                <label className="font-semibold">Dana</label>
-                <input
-                  type="number"
-                  defaultValue={data?.dana || ""}
-                  readOnly
-                  className="input input-bordered w-full bg-whtprmy input-sm"
-                />
-
-                <label className="font-semibold">Sumber Dana</label>
-                <input
-                  type="text"
-                  defaultValue={data?.sumber_dana || ""}
-                  readOnly
-                  className="input input-bordered w-full bg-whtprmy input-sm"
-                />
-                <label className="font-semibold">Laporan Akhir</label>
-                <input
-                  type="text"
-                  defaultValue={data?.laporan_akhir || ""}
+                  defaultValue={data?.url_sertifikat || ""}
                   readOnly
                   className="input input-bordered w-full bg-whtprmy input-sm"
                 />
@@ -202,12 +144,7 @@ const DetailPengModal = ({ data }) => {
                       key={index}
                       className="border-b border-gray-300 py-3 flex justify-between items-center"
                     >
-                      <span>
-                        {participant.name} -{" "}
-                        {participant.category === "mahasiswa"
-                          ? "Mahasiswa"
-                          : "Dosen"}
-                      </span>
+                      <span>{participant.name} - Mahasiswa</span>
                       <span className="text-gray-500">{participant.id}</span>
                     </li>
                   ))}
@@ -249,4 +186,4 @@ const DetailPengModal = ({ data }) => {
   );
 };
 
-export default DetailPengModal;
+export default DetailPresModal;

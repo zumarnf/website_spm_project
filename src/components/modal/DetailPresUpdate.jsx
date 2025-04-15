@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const DetailPenUpdate = ({ data }) => {
+const DetailPresUpdate = ({ data }) => {
   const [role, setRole] = useState(null);
   const [formData, setFormData] = useState({});
   const [participants, setParticipants] = useState([]);
@@ -14,17 +14,14 @@ const DetailPenUpdate = ({ data }) => {
     name: "",
     id: "",
     id_prodi: "",
-    category: "",
   });
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeIndex, setActiveIndex] = useState(null);
 
-  // Use useDebounce for searchTerm to debounce the value
-  const [debouncedSearchTerm] = useDebounce(searchTerm, 900); // 500ms debounce delay
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 900); // 900ms debounce delay
 
-  // Recursive function to fetch paginated data
   const fetchPage = async (
     endpoint,
     config,
@@ -63,29 +60,18 @@ const DetailPenUpdate = ({ data }) => {
 
     if (data) {
       setFormData({
-        judul: data.judul || "",
-        tahun: data.tahun || "",
-        no_sk: data.no_sk || "",
-        no_kontrak: data.no_kontrak || "",
-        skema: data.skema || "",
-        bidang: data.bidang || "",
-        dana: data.dana || "",
-        sumber_dana: data.sumber_dana || "",
-        laporan_akhir: data.laporan_akhir || "",
+        nama_lomba: data.nama_lomba || "",
+        juara: data.juara || "",
+        url_sertifikat: data.url_sertifikat || "",
+        url_foto: data.url_foto || "",
       });
 
-      setParticipants([
-        ...(data.dosen || []).map((d) => ({
-          id: d.id,
-          name: `${d.dosen.gelar_depan} ${d.dosen.name}, ${d.dosen.gelar_belakang}`,
-          category: "dosen",
-        })),
-        ...(data.mahasiswa || []).map((m) => ({
+      setParticipants(
+        (data.mahasiswa || []).map((m) => ({
           id: m.id,
           name: m.mahasiswa.name,
-          category: "mahasiswa",
-        })),
-      ]);
+        }))
+      );
     }
   }, [data]);
 
@@ -104,7 +90,7 @@ const DetailPenUpdate = ({ data }) => {
         };
 
         const url = `${API_URL}/prodi`;
-        const allProdi = await fetchPage(url, config, 1, [], 20); // 20 data per halaman
+        const allProdi = await fetchPage(url, config, 1, [], 20);
         setProdiOptions(allProdi);
       } catch (error) {
         console.error("Failed to fetch program studi data:", error);
@@ -115,11 +101,7 @@ const DetailPenUpdate = ({ data }) => {
   }, []);
 
   const searchParticipants = async (term) => {
-    if (!newParticipant.id_prodi || !newParticipant.category || !term) return;
-
-    console.log("Searching with term:", term);
-    console.log("Category:", newParticipant.category);
-    console.log("Prodi ID:", newParticipant.id_prodi);
+    if (!newParticipant.id_prodi || !term) return;
 
     const token = localStorage.getItem("token");
     if (!token) {
@@ -131,10 +113,7 @@ const DetailPenUpdate = ({ data }) => {
       headers: { Authorization: `Bearer ${token}` },
     };
 
-    const endpoint =
-      newParticipant.category === "mahasiswa"
-        ? `${API_URL}/mahasiswa?s_table=id_prodi&s=${newParticipant.id_prodi}`
-        : `${API_URL}/dosen?s_table=id_prodi&s=${newParticipant.id_prodi}`;
+    const endpoint = `${API_URL}/mahasiswa?s_table=id_prodi&s=${newParticipant.id_prodi}`;
 
     try {
       const allResults = await fetchPage(endpoint, config);
@@ -142,7 +121,6 @@ const DetailPenUpdate = ({ data }) => {
         result.name.toLowerCase().includes(term.toLowerCase())
       );
 
-      console.log("Filtered Results:", filteredResults);
       setSearchResults(filteredResults);
     } catch (error) {
       console.error("Failed to search participants:", error);
@@ -153,16 +131,16 @@ const DetailPenUpdate = ({ data }) => {
     if (debouncedSearchTerm) {
       searchParticipants(debouncedSearchTerm);
     } else {
-      setSearchResults([]); // Clear search results when the term is empty
+      setSearchResults([]);
     }
-  }, [debouncedSearchTerm, newParticipant.id_prodi, newParticipant.category]); // Use debounced search term
+  }, [debouncedSearchTerm, newParticipant.id_prodi]);
 
   const handleSearchName = (value) => {
     setSearchTerm(value);
-    setActiveIndex(-1); // Reset active index when the user types
+    setActiveIndex(-1);
     setNewParticipant((prev) => ({
       ...prev,
-      name: value, // Update participant name immediately
+      name: value,
     }));
   };
 
@@ -177,10 +155,7 @@ const DetailPenUpdate = ({ data }) => {
   };
 
   const handleSelectParticipant = (participant) => {
-    console.log("Participant received:", participant);
-
     if (!participant || !participant.name) {
-      console.error("Invalid participant selected:", participant);
       alert("Invalid participant selected. Please try again.");
       return;
     }
@@ -188,25 +163,17 @@ const DetailPenUpdate = ({ data }) => {
     setNewParticipant((prev) => ({
       ...prev,
       name: participant.name,
-      id:
-        newParticipant.category === "mahasiswa"
-          ? participant.nim
-          : participant.nip, // Sesuaikan ID berdasarkan kategori
+      id: participant.nim,
     }));
 
     setSearchResults([]);
   };
 
   const handleAddParticipant = async () => {
-    const { name, id_prodi, category, id } = newParticipant;
+    const { name, id_prodi, id } = newParticipant;
 
-    if (!name || !id_prodi || !category || !id) {
+    if (!name || !id_prodi || !id) {
       alert("All participant details must be filled.");
-      return;
-    }
-
-    if (category !== "mahasiswa" && category !== "dosen") {
-      alert("Invalid category selected.");
       return;
     }
 
@@ -221,13 +188,10 @@ const DetailPenUpdate = ({ data }) => {
         headers: { Authorization: `Bearer ${token}` },
       };
 
-      const endpoint =
-        category === "mahasiswa"
-          ? `${API_URL}/penelitianMahasiswa`
-          : `${API_URL}/penelitianDosen`;
+      const endpoint = `${API_URL}/prestasiMahasiswa`;
 
       const currentParticipantsResponse = await axios.get(
-        `${endpoint}?id_penelitian=${data.id}`,
+        `${endpoint}?id_prestasi=${data.id}`,
         config
       );
 
@@ -240,17 +204,16 @@ const DetailPenUpdate = ({ data }) => {
       const newFlag = currentMaxFlag + 1;
 
       const newParticipantData = {
-        id_penelitian: data.id,
-        nim_mahasiswa: category === "mahasiswa" ? id : null,
-        nip_dosen: category === "dosen" ? id : null,
+        id_prestasi: data.id,
+        nim_mahasiswa: id,
         flag: newFlag,
       };
 
       await axios.post(endpoint, newParticipantData, config);
 
-      setParticipants((prev) => [...prev, { id, name, category }]);
+      setParticipants((prev) => [...prev, { id, name }]);
 
-      setNewParticipant({ name: "", id: "", id_prodi: "", category: "" });
+      setNewParticipant({ name: "", id: "", id_prodi: "" });
       toast.success("Participant added successfully.");
     } catch (error) {
       console.error("Failed to add participant:", error);
@@ -277,9 +240,9 @@ const DetailPenUpdate = ({ data }) => {
         },
       };
 
-      await axios.put(`${API_URL}/penelitian/${data.id}`, formData, config);
+      await axios.put(`${API_URL}/prestasi/${data.id}`, formData, config);
 
-      toast.success("Data penelitian berhasil diperbarui.");
+      toast.success("Data prestasi berhasil diperbarui.");
       handleCloseModal();
     } catch (error) {
       console.error("Terjadi kesalahan:", error);
@@ -292,11 +255,11 @@ const DetailPenUpdate = ({ data }) => {
   };
 
   const handleCloseModal = () => {
-    const modal = document.getElementById("modal_18");
+    const modal = document.getElementById("modal_30");
     modal.close();
   };
 
-  const handleRemoveParticipant = async (idToRemove, category) => {
+  const handleRemoveParticipant = async (idToRemove) => {
     try {
       setParticipants((prev) => prev.filter((p) => p.id !== idToRemove));
 
@@ -313,22 +276,12 @@ const DetailPenUpdate = ({ data }) => {
         },
       };
 
-      let endpoint = "";
-      if (category === "mahasiswa") {
-        endpoint = `${API_URL}/penelitianMahasiswa/${idToRemove}`;
-      } else if (category === "dosen") {
-        endpoint = `${API_URL}/penelitianDosen/${idToRemove}`;
-      } else {
-        alert("Kategori tidak valid.");
-        return;
-      }
+      const endpoint = `${API_URL}/prestasiMahasiswa/${idToRemove}`;
 
       const response = await axios.delete(endpoint, config);
 
       if (response.status === 200) {
-        toast.success(
-          `Partisipan ${category} dengan ID ${idToRemove} berhasil dihapus.`
-        );
+        toast.success(`Partisipan dengan ID ${idToRemove} berhasil dihapus.`);
       } else {
         toast.error(`Gagal menghapus partisipan: ${response.data.message}`);
       }
@@ -343,10 +296,10 @@ const DetailPenUpdate = ({ data }) => {
   };
 
   return (
-    <dialog id="modal_18" className="modal modal-bottom sm:modal-middle">
+    <dialog id="modal_30" className="modal modal-bottom sm:modal-middle">
       <div className="modal-box bg-whtprmy text-blckprmy overflow-y-auto sm:w-full sm:max-w-3xl">
         <h3 className="font-bold text-lg mb-4 sticky top-0 left-0 z-10 bg-whtprmy shadow-md p-2 text-center">
-          Update Penelitian
+          Update Prestasi
         </h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -380,20 +333,10 @@ const DetailPenUpdate = ({ data }) => {
                   key={index}
                   className="border-b border-gray-300 py-3 flex justify-between items-center"
                 >
-                  <span>
-                    {participant.name} -{" "}
-                    {participant.category === "mahasiswa"
-                      ? "Mahasiswa"
-                      : "Dosen"}
-                  </span>
+                  <span>{participant.name}</span>
                   <button
                     className="btn btn-sm bg-rdprmy text-whtprmy border-none"
-                    onClick={() =>
-                      handleRemoveParticipant(
-                        participant.id,
-                        participant.category
-                      )
-                    }
+                    onClick={() => handleRemoveParticipant(participant.id)}
                   >
                     Remove
                   </button>
@@ -403,39 +346,23 @@ const DetailPenUpdate = ({ data }) => {
             <div className="mt-4">
               <h5 className="font-semibold">Tambah Partisipan</h5>
               <div className="flex flex-col gap-2 mt-2">
-                <div className="flex gap-2">
-                  <select
-                    value={newParticipant.category}
-                    onChange={(e) =>
-                      setNewParticipant({
-                        ...newParticipant,
-                        category: e.target.value,
-                      })
-                    }
-                    className="select select-bordered bg-whtprmy select-sm text-xs"
-                  >
-                    <option value="">Category</option>
-                    <option value="mahasiswa">Mahasiswa</option>
-                    <option value="dosen">Dosen</option>
-                  </select>
-                  <select
-                    value={newParticipant.id_prodi}
-                    onChange={(e) =>
-                      setNewParticipant({
-                        ...newParticipant,
-                        id_prodi: e.target.value,
-                      })
-                    }
-                    className="select select-bordered bg-whtprmy select-sm w-full text-xs"
-                  >
-                    <option value="">Select Prodi</option>
-                    {prodiOptions.map((id_prodi) => (
-                      <option key={id_prodi.id} value={id_prodi.id}>
-                        {id_prodi.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <select
+                  value={newParticipant.id_prodi}
+                  onChange={(e) =>
+                    setNewParticipant({
+                      ...newParticipant,
+                      id_prodi: e.target.value,
+                    })
+                  }
+                  className="select select-bordered bg-whtprmy select-sm w-full text-xs"
+                >
+                  <option value="">Select Prodi</option>
+                  {prodiOptions.map((id_prodi) => (
+                    <option key={id_prodi.id} value={id_prodi.id}>
+                      {id_prodi.name}
+                    </option>
+                  ))}
+                </select>
                 <div className="flex-1">
                   <input
                     type="text"
@@ -495,4 +422,4 @@ const DetailPenUpdate = ({ data }) => {
   );
 };
 
-export default DetailPenUpdate;
+export default DetailPresUpdate;

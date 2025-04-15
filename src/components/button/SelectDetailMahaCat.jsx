@@ -14,7 +14,6 @@ const SelectDetailMahaCat = ({ handleJudul }) => {
       >
         <option disabled>Kategori</option>
         <option value="Penelitian">Penelitian</option>
-        <option value="Publikasi">Publikasi</option>
         <option value="Prestasi">Prestasi</option>
       </select>
     </>

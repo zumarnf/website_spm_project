@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const InputPresMaha = ({ prestasiData, onClose }) => {
   const navigate = useNavigate();
@@ -12,6 +15,7 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); // Menyimpan istilah pencarian
   const [activeIndex, setActiveIndex] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -22,7 +26,7 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
 
     // Ambil data prodi
     axios
-      .get("http://127.0.0.1:8000/api/v1/prodi", {
+      .get(`${API_URL}/prodi`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,7 +38,7 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
 
     // Ambil data mahasiswa
     axios
-      .get("http://127.0.0.1:8000/api/v1/mahasiswa", {
+      .get(`${API_URL}/mahasiswa`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,11 +50,14 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
   }, []);
 
   const handleAddParticipant = () => {
-    if (participants.length < 5) {
-      setParticipants([
-        ...participants,
-        { name: "", id_prodi: "", id: "", flag: 2 }, // Anggota dengan flag 2
-      ]);
+    if (participants.length < 7) {
+      const newParticipant = {
+        name: "",
+        id: "",
+        id_prodi: "",
+        flag: participants.length + 1, // Flag diteruskan
+      };
+      setParticipants([...participants, newParticipant]);
     }
   };
 
@@ -69,27 +76,39 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
     setParticipants(updatedParticipants);
   };
 
-  const fetchMahasiswaByProdi = (idProdi) => {
+  const fetchMahasiswaByProdi = async (idProdi) => {
     const token = localStorage.getItem("token");
     if (!token) {
+      console.error("Token is not available.");
       return;
     }
 
-    axios
-      .get(
-        `http://127.0.0.1:8000/api/v1/mahasiswa?s_table=id_prodi&s=${idProdi}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    const endpoint = `${API_URL}/mahasiswa?s_table=id_prodi&s=${idProdi}`;
+
+    let allData = [];
+    let page = 1;
+
+    try {
+      while (true) {
+        const response = await axios.get(`${endpoint}&page=${page}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const data = response.data.data;
+
+        if (data.length === 0) {
+          break; // Exit loop when no more data is available
         }
-      )
-      .then((response) => {
-        setMahasiswa(response.data.data);
-      })
-      .catch((error) =>
-        console.error("Error fetching mahasiswa by prodi:", error)
-      );
+
+        allData = [...allData, ...data];
+        page++;
+      }
+
+      // Set the final data to state
+      setMahasiswa(allData);
+    } catch (error) {
+      console.error("Error fetching mahasiswa by prodi:", error);
+    }
   };
 
   const handleDeleteParticipant = (index) => {
@@ -104,12 +123,16 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
 
     // Update search term untuk pencarian dinamis
     setSearchTerm(value);
+    setLoading(true); // Mulai loading
 
     // Filter mahasiswa berdasarkan input
-    const filteredMahasiswa = mahasiswa.filter((m) =>
-      m.name.toLowerCase().includes(value.toLowerCase())
-    );
-    setSearchResults(filteredMahasiswa);
+    setTimeout(() => {
+      const filteredMahasiswa = mahasiswa.filter((m) =>
+        m.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setSearchResults(filteredMahasiswa);
+      setLoading(false);
+    }, 500);
   };
 
   const handleSelectName = (index, mahasiswaItem) => {
@@ -130,16 +153,12 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
     }
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/prestasi",
-        prestasiData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${API_URL}/prestasi`, prestasiData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       async function postParticipants(participants, token) {
         for (const participant of participants) {
           const newParticipants = {
@@ -149,19 +168,15 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
           };
 
           // Kirim setiap partisipan ke API
-          await axios.post(
-            "http://127.0.0.1:8000/api/v1/prestasiMahasiswa",
-            newParticipants,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          await axios.post(`${API_URL}/prestasiMahasiswa`, newParticipants, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          });
         }
-        alert("Data berhasil disimpan!");
-        navigate(location.href);
+        toast.success("Data prestasi berhasil disimpan.");
+
         onClose();
       }
 
@@ -195,9 +210,15 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
                   </option>
                 ))}
               </select>
-              <label className="font-semibold">
-                Nama {index === 0 ? "Ketua" : "Anggota"}
-              </label>
+
+              <div className="flex flex-col py-2">
+                <label className="font-semibold">
+                  Nama {index === 0 ? "Ketua" : "Anggota"}
+                </label>
+                <label classname="flex font-extralight">
+                  Jika nama tidak muncul, silahkan hapus lalu ketik lagi!
+                </label>
+              </div>
               <input
                 type="text"
                 value={participant.name}
@@ -206,6 +227,11 @@ const InputPresMaha = ({ prestasiData, onClose }) => {
                 className="input input-bordered w-full bg-whtprmy input-sm"
                 placeholder="Cari mahasiswa"
               />
+              {loading && activeIndex === index && (
+                <div className="flex justify-center my-2">
+                  <span className="loading loading-spinner loading-sm"></span>
+                </div>
+              )}
 
               {searchTerm &&
                 searchResults.length > 0 &&

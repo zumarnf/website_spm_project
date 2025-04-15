@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const InputMahaModal = () => {
   // State untuk menyimpan input form
@@ -40,7 +43,7 @@ const InputMahaModal = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/mahasiswa",
+        `${API_URL}/mahasiswa`,
         formData, // Kirim formData sebagai payload
         {
           headers: {
@@ -48,11 +51,11 @@ const InputMahaModal = () => {
           },
         }
       );
-      alert("Data berhasil disimpan!");
+      toast.success("Data mahasiswa berhasil disimpan."); // Tampilkan notifikasi sukses
       closeModal(); // Tutup modal setelah data tersimpan
     } catch (error) {
-      console.error(error);
-      alert("Gagal menyimpan data. Silakan coba lagi.");
+      console.error(error); // Log error ke console
+      toast.error("Gagal menyimpan data mahasiswa."); // Tampilkan notifikasi error
     }
   };
 
@@ -65,7 +68,7 @@ const InputMahaModal = () => {
           alert("Token tidak ditemukan! Silakan login ulang.");
           return;
         }
-        const response = await axios.get("http://127.0.0.1:8000/api/v1/prodi", {
+        const response = await axios.get(`${API_URL}/prodi`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

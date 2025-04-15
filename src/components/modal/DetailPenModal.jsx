@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const DetailPenModal = ({ data }) => {
   const [role, setRole] = useState(null);
@@ -39,14 +42,13 @@ const DetailPenModal = ({ data }) => {
       };
 
       // 1. Hapus relasi `penelitianMahasiswa` jika ada
-      // console.log(data);
       if (data?.mahasiswa?.length > 0) {
         for (const mahasiswa of data.mahasiswa) {
           console.log(
             `Menghapus relasi penelitianMahasiswa ID: ${mahasiswa.id}`
           );
           await axios.delete(
-            `http://127.0.0.1:8000/api/v1/penelitianMahasiswa/${mahasiswa.id}`,
+            `${API_URL}/penelitianMahasiswa/${mahasiswa.id}`,
             config
           );
         }
@@ -58,10 +60,7 @@ const DetailPenModal = ({ data }) => {
       if (data?.dosen?.length > 0) {
         for (const dosen of data.dosen) {
           console.log(`Menghapus relasi penelitianDosen ID: ${dosen.id}`);
-          await axios.delete(
-            `http://127.0.0.1:8000/api/v1/penelitianDosen/${dosen.id}`,
-            config
-          );
+          await axios.delete(`${API_URL}/penelitianDosen/${dosen.id}`, config);
         }
         console.log("Semua relasi penelitianDosen berhasil dihapus.");
       }
@@ -70,17 +69,17 @@ const DetailPenModal = ({ data }) => {
       // 3. Hapus data induk `penelitian`
       console.log(`Menghapus data penelitian dengan ID: ${data.id}`);
       const response = await axios.delete(
-        `http://127.0.0.1:8000/api/v1/penelitian/${data.id}`,
+        `${API_URL}/penelitian/${data.id}`,
         config
       );
 
       if (response.status === 200) {
-        alert("Data penelitian berhasil dihapus.");
+        toast.success("Data penelitian berhasil dihapus.");
         closeModal(); // Tutup modal jika berhasil
         // Tambahkan logika untuk refresh data jika diperlukan
       } else {
         console.error("Respon server:", response);
-        alert(`Gagal menghapus data: ${response.data.message}`);
+        toast.error(`Gagal menghapus data: ${response.data.message}`);
       }
     } catch (error) {
       console.error("Terjadi kesalahan:", error);

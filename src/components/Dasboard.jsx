@@ -12,7 +12,7 @@ import ContainerProfile from "./ContainerProfile";
 import MenuModal from "./modal/MenuModal";
 import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api/v1";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const CardItem = ({ title, number, Icon, link, iconColor, loading, error }) => (
   <div className="flex flex-col md:flex-row justify-between items-center w-full h-full border rounded-2xl p-3 md:p-7 shadow-md bg-whtprmy">
@@ -24,7 +24,7 @@ const CardItem = ({ title, number, Icon, link, iconColor, loading, error }) => (
         {loading ? (
           <span className="text-blue-500 text-lg">Loading...</span>
         ) : error ? (
-          <span className="text-red-500 text-lg">Error</span>
+          <span className="text-red-500 text-lg">Coming Soon...</span>
         ) : (
           <>
             <Icon className={`text-xl md:text-3xl mr-2 md:mr-6 ${iconColor}`} />
@@ -64,12 +64,12 @@ const Dashboard = () => {
     }
 
     const endpoints = [
-      { key: "penelitian", url: `${API_BASE_URL}/penelitian` },
-      { key: "publikasi", url: `${API_BASE_URL}/publikasi` },
-      { key: "dosen", url: `${API_BASE_URL}/dosen` },
-      { key: "mahasiswa", url: `${API_BASE_URL}/mahasiswa` },
-      { key: "pengabdian", url: `${API_BASE_URL}/pengabdian` },
-      { key: "prestasi", url: `${API_BASE_URL}/prestasi` },
+      { key: "penelitian", url: `${API_URL}/penelitian?per_page=1` },
+      { key: "publikasi", url: `${API_URL}/publikasi?per_page=1` },
+      { key: "dosen", url: `${API_URL}/dosen?per_page=1` },
+      { key: "mahasiswa", url: `${API_URL}/mahasiswa?per_page=1` },
+      { key: "pengabdian", url: `${API_URL}/pengabdian?per_page=1` },
+      { key: "prestasi", url: `${API_URL}/prestasi?per_page=1` },
     ];
 
     endpoints.forEach(async (endpoint) => {
@@ -77,11 +77,12 @@ const Dashboard = () => {
         const response = await axios.get(endpoint.url, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        if (response.status === 200 && response.data.data) {
+
+        if (response.status === 200 && response.data.meta) {
           setCounts((prev) => ({
             ...prev,
             [endpoint.key]: {
-              count: response.data.data.length,
+              count: response.data.meta.total, // Ambil total dari meta
               loading: false,
               error: false,
             },

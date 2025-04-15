@@ -13,7 +13,6 @@ const SelectDetailDosCat = ({ handleJudul }) => {
       >
         <option disabled>Kategori</option>
         <option value="Penelitian">Penelitian</option>
-        <option value="Publikasi">Publikasi</option>
         <option value="Detail">Detail</option>
       </select>
     </>

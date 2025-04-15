@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import InputPresMaha from "./InputPresMaha";
+import { toast } from "react-toastify";
 
 const InputPresModal = ({ onClose }) => {
   const [isModalPresVisible, setModalPresVisible] = useState(true);
@@ -23,7 +24,7 @@ const InputPresModal = ({ onClose }) => {
       setModalPresVisible(false);
       setModalMahaVisible(true);
     } else {
-      alert("Lengkapi data prestasi");
+      toast.error("Lengkapi data prestasi");
     }
   };
 
